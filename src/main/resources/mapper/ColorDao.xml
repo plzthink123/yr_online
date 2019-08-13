@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.think123.yr_online.dao.info.ColorDao">
+	<select id="findColorList"
+			resultType="com.think123.yr_online.dataobject.Color">
+
+		select
+		co_id,
+		co_name,
+		co_remark,
+		co_status
+
+		from
+		info_color
+
+		<where>
+
+			<if test="co_id != null ">
+				co_id like concat('%',#{co_id},'%')
+			</if>
+
+			<if test="co_name != null ">
+				and co_name like concat('%',#{co_name},'%')
+			</if>
+
+			<if test="co_remark != null ">
+				and co_remark like concat('%',#{co_remark},'%')
+			</if>
+			<if test="co_status == '00' ">
+				and co_status = '00'
+			</if>
+			<if test="co_status == '22' ">
+				and co_status = '22'
+			</if>
+			<if test="co_status == '55' ">
+				and co_status = '55'
+			</if>
+			<if test="co_status == '77' ">
+				and co_status = '77'
+			</if>
+			<if test="co_status == '99' ">
+				and co_status = '99'
+			</if>
+
+		</where>
+
+	</select>
+
+	<delete id="delete">
+		delete from info_color
+		<where>
+			<foreach item="item"  collection="array" open=""
+					 separator="or" close="">
+				co_id = #{item}
+			</foreach>
+		</where>
+	</delete>
+  
+</mapper>

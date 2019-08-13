@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.think123.yr_online.dao.safty.UserDao">
+	<select id="findUserList"
+			resultType="com.think123.yr_online.dataobject.User">
+
+		select
+		u_id,
+		u_name,
+		u_pwd,
+		u_status
+
+		from
+		sys_user
+
+		<where>
+
+			<if test="u_id != null ">
+				u_id like concat('%',#{u_id},'%')
+			</if>
+
+			<if test="u_name != null ">
+				and u_name like concat('%',#{u_name},'%')
+			</if>
+			<if test="u_status == '00' ">
+				and u_status = '00'
+			</if>
+			<if test="u_status == '22' ">
+				and u_status = '22'
+			</if>
+			<if test="u_status == '55' ">
+				and u_status = '55'
+			</if>
+			<if test="u_status == '77' ">
+				and u_status = '77'
+			</if>
+			<if test="u_status == '99' ">
+				and u_status = '99'
+			</if>
+
+		</where>
+
+	</select>
+
+
+	<delete id="delete">
+		delete from sys_user
+		<where>
+			<foreach item="item"  collection="array" open=""
+					 separator="or" close="">
+				u_id = #{item}
+			</foreach>
+		</where>
+	</delete>
+
+	<update id="update">
+		update sys_user
+		set u_name=#{u_name} ,
+			u_pwd=#{u_pwd} ,
+			u_status=#{u_status}
+		where u_id=#{u_id}
+	</update>
+	<select id="getAllRole" resultType="com.think123.yr_online.dataobject.Role">
+		select 	ro_id,
+		 		ro_name,
+		 		ro_remark
+		  from sys_role
+		  where ro_status ='55'
+	</select>
+	<select id="getOneUserRole" resultType="com.think123.yr_online.dataobject.Role">
+			select   ro_id,
+					  ro_name,
+					  ro_remark,
+					  ro_status
+			 from sys_role where ro_id
+			in
+		  	(select
+		 		ro_id
+		  	from sys_ur
+		 	 where u_id=#{u_id})
+		  	</select>
+	<insert id="addRole">
+		insert into sys_ur
+		  values(#{u_id},#{ro_id})
+	</insert>
+	<delete id="deleteRole">
+		delete from sys_ur where ro_id=#{ro_id} and u_id=#{u_id}
+	</delete>
+</mapper>

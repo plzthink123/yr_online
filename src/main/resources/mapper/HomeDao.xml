@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.think123.yr_online.dao.safty.HomeDao">
+
+	<select id="findAllModules" resultType="com.think123.yr_online.dataobject.Module" >
+	
+		select 
+	    	p.m_id   p_id,
+	    	p.m_name p_name,
+	    	m.m_id,
+	    	m.m_name,
+	    	m.m_url
+	    
+	    from 
+	    	sys_module m  join sys_module p   on m.m_pid  = p.m_id
+	    
+	    where
+	    	m.m_pid is not null and 
+	    	m.m_ismenu=1        and 
+	    	m.m_status='55'     and
+	    	
+	    	p.m_pid is null     and
+	    	p.m_ismenu=1        and 
+	    	p.m_status='55' 
+	    
+	    order by
+	    	p.m_id,m.m_id
+	
+	</select>
+  
+	<select id="findModulesByCurrUserId" resultType="com.think123.yr_online.dataobject.Module" >
+	
+		select 
+	    	p.m_id   p_id,
+	    	p.m_name p_name,
+	    	m.m_id,
+	    	m.m_name,
+	    	m.m_url
+	    
+	    from 
+	    	sys_user u join sys_ur     ur  on u.u_id   = ur.u_id
+	    			   join sys_role   r   on ur.ro_id = r.ro_id
+	    			   join sys_rm     rm  on r.ro_id  = rm.ro_id
+	    			   join sys_module m   on rm.m_id  = m.m_id
+	    			   join sys_module p   on m.m_pid  = p.m_id
+	    
+	    where
+	    	m.m_pid is not null and 
+	    	m.m_ismenu=1        and 
+	    	m.m_status='55'     and
+	    	
+	    	p.m_pid is null     and
+	    	p.m_ismenu=1        and 
+	    	p.m_status='55'     and
+	    	
+	    	r.ro_status='55'    and
+	    	u.u_status='55'     and
+	    	
+	    	u.u_id=#{userId}
+	    
+	    order by
+	    	p.m_id,m.m_id
+    
+  </select>
+  
+  <select id="findMobileModulesByCurrUserId" resultType="com.think123.yr_online.dataobject.Module" >
+	
+		select 
+	    	
+	    	m.m_id,
+	    	m.m_name,
+	    	m.m_url
+	    
+	    from 
+	    	sys_user u join sys_ur     ur  on u.u_id   = ur.u_id
+	    			   join sys_role   r   on ur.ro_id = r.ro_id
+	    			   join sys_rm     rm  on r.ro_id  = rm.ro_id
+	    			   join sys_module m   on rm.m_id  = m.m_id
+	    
+	    where
+	    	m.m_pid is not null and 
+	    	m.m_ismenu=1        and 
+	    	m.m_status='55'     and
+	    	
+	    	r.ro_status='55'    and
+	    	u.u_status='55'     and
+	    	
+	    	u.u_id=#{userId}    and
+	    	
+	    	m.m_id in (2510,2515,2520,2525,2540,2545)
+	    
+	    order by
+	    	m.m_id
+    
+  </select>
+	
+	
+  
+</mapper>

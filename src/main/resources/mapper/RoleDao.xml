@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.think123.yr_online.dao.safty.RoleDao">
+	<select id="findRoleList"
+			resultType="com.think123.yr_online.dataobject.Role">
+
+		select
+		ro_id,
+		ro_name,
+		ro_remark,
+		ro_status
+
+		from
+		sys_role
+
+		<where>
+
+			<if test="ro_id != null ">
+				ro_id like concat('%',#{ro_id},'%')
+			</if>
+
+			<if test="ro_name != null ">
+				and ro_name like concat('%',#{ro_name},'%')
+			</if>
+
+			<if test="ro_remark != null ">
+				and ro_remark like concat('%',#{ro_remark},'%')
+			</if>
+			<if test="ro_status == '00' ">
+				and ro_status = '00'
+			</if>
+			<if test="ro_status == '22' ">
+				and ro_status = '22'
+			</if>
+			<if test="ro_status == '55' ">
+				and ro_status = '55'
+			</if>
+			<if test="ro_status == '77' ">
+				and ro_status = '77'
+			</if>
+			<if test="ro_status == '99' ">
+				and ro_status = '99'
+			</if>
+
+		</where>
+
+	</select>
+
+	<delete id="delete">
+		delete from sys_role
+		<where>
+			<foreach item="item"  collection="array" open=""
+					 separator="or" close="">
+				ro_id = #{item}
+			</foreach>
+		</where>
+	</delete>
+	<select id="findAllModule" resultType="com.think123.yr_online.dataobject.Module">
+		select m_id,
+				m_pid,
+				m_name,
+				m_url,
+				m_ismenu,
+				m_status
+		  from sys_module
+	</select>
+
+	<select id="findOneRoleModule" resultType="com.think123.yr_online.dataobject.Module">
+		select m_id,
+				m_pid,
+				m_name,
+				m_url,
+				m_ismenu,
+				m_status
+		  from sys_module
+		  where m_id
+		  in
+		(select m_id from sys_rm where ro_id=#{ro_id})
+	</select>
+
+
+	<delete id="deleteModule">
+		delete from sys_rm where ro_id=#{ro_id} and m_id=#{m_id}
+	</delete>
+	<insert id="addModule">
+		insert into sys_rm
+		  values(#{m_id},#{ro_id})
+	</insert>
+  
+</mapper>
