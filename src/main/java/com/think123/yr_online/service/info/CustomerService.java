@@ -1,7 +1,9 @@
 package com.think123.yr_online.service.info;
 
+import com.think123.yr_online.dataobject.Customer;
 import com.think123.yr_online.dto.CustomerDto;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,4 +18,6 @@ public interface CustomerService {
     void modifyCustomer(CustomerDto dto);
 
     void deleteCustomer(Integer[] ids);
+
+    List<Customer> getCustomerAll();
 }

@@ -27,6 +27,14 @@ public class StandardController {
         return standardService.getStandardPage(dto);
 
     }
+    @GetMapping("/standard/all")
+    public Result standardExecQueryAll( ){
+
+
+        return Result.successResult("success",standardService.getStandardAll());
+
+    }
+
 
     @PostMapping("/standard")
     public Result standardExecAdd(@RequestBody StandardDto dto ) throws InterruptedException {

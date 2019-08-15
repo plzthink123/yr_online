@@ -27,6 +27,13 @@ public class ColorController {
         return colorService.getColorPage(dto);
 
     }
+    @GetMapping("/color/all")
+    public Result colorExecQueryAll(){
+
+
+        return Result.successResult("success",colorService.getAllColor());
+
+    }
 
     @PostMapping("/color")
     public Result colorExecAdd(@RequestBody ColorDto dto ) throws InterruptedException {

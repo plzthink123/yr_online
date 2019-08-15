@@ -66,6 +66,7 @@
 				m_ismenu,
 				m_status
 		  from sys_module
+		  where m_pid!=''
 	</select>
 
 	<select id="findOneRoleModule" resultType="com.think123.yr_online.dataobject.Module">

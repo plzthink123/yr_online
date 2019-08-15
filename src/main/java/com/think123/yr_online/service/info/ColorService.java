@@ -1,7 +1,9 @@
 package com.think123.yr_online.service.info;
 
+import com.think123.yr_online.dataobject.Color;
 import com.think123.yr_online.dto.ColorDto;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,4 +18,6 @@ public interface ColorService {
     void modifyColor(ColorDto dto);
 
     void deleteColor(Integer[] ids);
+
+    List<Color> getAllColor();
 }

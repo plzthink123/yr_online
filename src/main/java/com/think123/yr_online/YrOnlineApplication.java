@@ -1,5 +1,7 @@
 package com.think123.yr_online;
 
+import com.think123.yr_online.service.ShiroService;
+import com.think123.yr_online.service.safty.impl.ShiroServiceImpl;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -33,4 +35,8 @@ public class YrOnlineApplication {
             };
         }
 
+        @Bean
+        public ShiroService shiroService(){
+            return new ShiroServiceImpl();
+        }
 }

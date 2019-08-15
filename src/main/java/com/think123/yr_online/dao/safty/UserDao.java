@@ -29,4 +29,12 @@ public interface UserDao {
 	void addRole(@Param("ro_id") Integer ro_id, @Param("u_id") String u_id);
 
 	void deleteRole(@Param("ro_id") Integer ro_id, @Param("u_id") String u_id);
+
+	User findByUserName(@Param("u_name") String u_name);
+
+	List<Role> findRoleByUserId(@Param("u_id")String u_id);
+
+	String findOldPasswordById(@Param("u_id") String u_id);
+
+	void changePasswordById(@Param("u_id") String u_id, @Param("u_pwd") String pwd);
 }

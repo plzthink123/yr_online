@@ -70,4 +70,19 @@ public class UserServiceImplTest {
             System.out.println(role);
         }
     }
+
+
+    @Test
+    public void findbyUserNmae(){
+        User user = userDao.findByUserName("admin");
+        System.out.println(user);
+    }
+    @Test
+    public void findByUserId(){
+        List<Role> roles=userDao.findRoleByUserId("admin");
+        for (Role role: roles
+             ) {
+            System.out.println(role);
+        }
+    }
 }

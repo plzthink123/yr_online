@@ -1,6 +1,7 @@
 package com.think123.yr_online.service.safty;
 
 import com.think123.yr_online.dataobject.Role;
+import com.think123.yr_online.dataobject.User;
 import com.think123.yr_online.dto.UserDto;
 
 import java.util.List;
@@ -26,4 +27,12 @@ public interface UserService {
     void addRole(Integer[] movekeys,String u_id);
 
     void deleteRole(Integer[] movekeys,String u_id);
+
+    User findByUsername(String username);
+
+    List<Role> selectRoleByUserId(String u_id);
+
+    String findOldPasswordById(String u_id);
+
+    void changePasswordById(String u_id, String pwd);
 }

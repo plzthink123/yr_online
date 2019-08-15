@@ -1,7 +1,9 @@
 package com.think123.yr_online.service.info;
 
+import com.think123.yr_online.dataobject.Standard;
 import com.think123.yr_online.dto.StandardDto;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,4 +18,6 @@ public interface StandardService {
     void modifyStandard(StandardDto dto);
 
     void deleteStandard(Integer[] ids);
+
+    List<Standard> getStandardAll();
 }

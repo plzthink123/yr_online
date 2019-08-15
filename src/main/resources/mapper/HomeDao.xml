@@ -33,7 +33,7 @@
   
 	<select id="findModulesByCurrUserId" resultType="com.think123.yr_online.dataobject.Module" >
 	
-		select 
+		select  distinct
 	    	p.m_id   p_id,
 	    	p.m_name p_name,
 	    	m.m_id,
@@ -63,7 +63,7 @@
 	    
 	    order by
 	    	p.m_id,m.m_id
-    
+
   </select>
   
   <select id="findMobileModulesByCurrUserId" resultType="com.think123.yr_online.dataobject.Module" >

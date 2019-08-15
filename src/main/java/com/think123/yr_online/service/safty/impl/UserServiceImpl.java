@@ -90,4 +90,24 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public User findByUsername(String username) {
+        return UserDao.findByUserName(username);
+    }
+
+    @Override
+    public List<Role> selectRoleByUserId(String u_id) {
+        return UserDao.findRoleByUserId(u_id);
+    }
+
+    @Override
+    public String findOldPasswordById(String u_id) {
+        return UserDao.findOldPasswordById(u_id);
+    }
+
+    @Override
+    public void changePasswordById(String u_id, String pwd) {
+        UserDao.changePasswordById(u_id,pwd);
+    }
+
 }

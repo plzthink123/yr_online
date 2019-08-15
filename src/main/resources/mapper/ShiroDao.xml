@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="com.think123.yr_online.dao.safty.UserDao">
+<mapper namespace="com.think123.yr_online.dao.safty.ShiroDao">
 	
 	<resultMap id="userMap" type="com.think123.yr_online.dataobject.User">
 		<id  property="u_id" column="u_id"/>
@@ -145,15 +145,49 @@
 			  	r.ro_status= 55
 			  	and ur.u_id = #{u_id}
 	</select>
-	<select id="findOldPasswordById" resultType="string">
-		select u_pwd
-		from sys_user
-		where
-		u_id=#{u_id}
+
+
+
+	<select id="getModulesOfUser" resultType="com.think123.yr_online.dataobject.Module">
+		select m.m_id,
+				m.m_pid,
+				m.m_name,
+				m.m_url,
+				m.m_ismenu,
+				m.m_status
+		  from
+		  sys_user u
+			inner join sys_ur ur on ur.u_id=u.u_id
+			inner join sys_role r on r.ro_id = ur.ro_id
+			inner join sys_rm rm on rm.ro_id=ur.ro_id
+			inner join sys_module m on m.m_id=rm.m_id
+		where u.u_id=#{u_id}
 	</select>
-	<update id="changePasswordById">
-		update sys_user
-		set u_pwd=#{u_pwd}
-		where u_id=#{u_id}
-	</update>
+	<select id="getUser" resultType="com.think123.yr_online.dataobject.User">
+		select
+		 u_id,
+		 u_name,
+		 u_pwd,
+		 u_status
+		 from sys_user where u_id=#{u_id}
+	</select>
+	<select id="getAllSubModules" resultType="com.think123.yr_online.dataobject.Module">
+		  select
+		  		m_id,
+				m_pid,
+				m_name,
+				m_url,
+				m_ismenu,
+				m_status
+		  from sys_module
+	</select>
+	<select id="getAllRoles" resultType="com.think123.yr_online.dataobject.Role">
+		select ro_id,
+				ro_name,
+				ro_status
+				from
+				sys_role
+			   where
+			  	ro_status= 55
+	</select>
 </mapper>

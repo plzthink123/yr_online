@@ -24,4 +24,5 @@ public interface StandardDao {
 
 	void delete(Integer[] ids);
 
+    List<Standard> findAllStandard();
 }

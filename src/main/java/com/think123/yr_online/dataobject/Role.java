@@ -3,6 +3,9 @@ package com.think123.yr_online.dataobject;
 import lombok.Data;
 import lombok.ToString;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * @author plzthink123
  * 2019-08-07 12:05
@@ -32,6 +35,8 @@ public class Role {
    // @TableField("ro_status")
     private String ro_status;
 
+    private Set<Module> modules=new HashSet<>();
 
+    private Set<User> users =new HashSet<>();
 
 }

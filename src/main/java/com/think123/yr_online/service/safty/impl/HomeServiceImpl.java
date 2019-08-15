@@ -51,8 +51,33 @@ public class HomeServiceImpl implements HomeService {
 
 	@Override
 	public List<MenuDto> getMenusByCurrUser(CurrUser currUser) {
-		// TODO Auto-generated method stub
-		return null;
+		String userId = currUser.getUserId();
+
+		List<Module> moduleList = homeDao.findModulesByCurrUserId(userId);
+
+		List<MenuDto> mainMenuList = new ArrayList<MenuDto>();
+
+		MenuDto currMainMenu = null;
+		for(Module module : moduleList) {
+			if(currMainMenu==null || !module.getP_id().equals(currMainMenu.getMenuId())) {
+				currMainMenu = new MenuDto();
+				mainMenuList.add(currMainMenu);
+
+				currMainMenu.setMenuId(module.getP_id());
+				currMainMenu.setMenuName(module.getP_name());
+				currMainMenu.setSubMenuList( new ArrayList<MenuDto>() );
+			}
+
+			MenuDto subMenu = new MenuDto();
+			subMenu.setMenuId(module.getM_id());
+			subMenu.setMenuName(module.getM_name());
+			subMenu.setMenuUrl(module.getM_url());
+
+			currMainMenu.getSubMenuList().add(subMenu);
+
+		}
+
+		return mainMenuList;
 	}
 
 	@Override

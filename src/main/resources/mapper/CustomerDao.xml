@@ -58,5 +58,12 @@
 			</foreach>
 		</where>
 	</delete>
+	<select id="findAll" resultType="com.think123.yr_online.dataobject.Customer">
+		select 	cus_id,
+				cus_name,
+				cus_remark,
+				cus_status
+		  from info_customer
+	</select>
   
 </mapper>

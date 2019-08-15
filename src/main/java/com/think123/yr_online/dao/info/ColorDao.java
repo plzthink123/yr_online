@@ -24,4 +24,5 @@ public interface ColorDao {
 
 	void delete(Integer[] ids);
 
+    List<Color> findAllColor();
 }

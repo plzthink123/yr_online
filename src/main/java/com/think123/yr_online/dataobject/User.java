@@ -1,6 +1,10 @@
 package com.think123.yr_online.dataobject;
 
 import lombok.Data;
+import lombok.ToString;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author plzthink123
@@ -8,6 +12,7 @@ import lombok.Data;
  * 用户表
  */
 @Data
+@ToString
 //@TableName("sys_user")
 public class User {
 
@@ -24,5 +29,5 @@ public class User {
     //@TableField("u_status")
     private String u_status;
 
-
+    private Set<Role> roles=new HashSet<>();
 }

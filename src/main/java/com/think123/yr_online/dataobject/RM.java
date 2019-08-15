@@ -11,7 +11,7 @@ import lombok.Data;
  */
 @Data
 //@TableName("sys_rm")
-public class SysRM {
+public class RM {
 
     //权限id
     //@TableField("m_id")

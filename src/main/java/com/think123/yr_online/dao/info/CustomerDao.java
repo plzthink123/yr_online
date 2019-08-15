@@ -24,4 +24,5 @@ public interface CustomerDao {
 
 	void delete(Integer[] ids);
 
+	List<Customer> findAll();
 }

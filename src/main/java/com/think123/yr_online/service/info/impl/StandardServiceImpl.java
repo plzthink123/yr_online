@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -72,5 +73,10 @@ public class StandardServiceImpl implements StandardService {
     public void deleteStandard(Integer[] ids) {
         standardDao.delete(ids);
 
+    }
+
+    @Override
+    public List<Standard> getStandardAll() {
+        return standardDao.findAllStandard();
     }
 }

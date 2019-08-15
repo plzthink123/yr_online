@@ -23,7 +23,13 @@ public class CustomerController {
 
     @GetMapping("/customer")
     public Map<String,Object> customerExecQuery(CustomerDto dto){
+
         return customerService.getCustomerPage(dto);
+    }
+    @GetMapping("/customer/all")
+    public Result customerExecAll(){
+
+        return Result.successResult("success",customerService.getCustomerAll());
     }
 
     @PostMapping("/customer")
@@ -47,6 +53,7 @@ public class CustomerController {
         customerService.deleteCustomer(ids);
         return Result.successResult("删除客户信息成功！");
     }
+
 
 
 }

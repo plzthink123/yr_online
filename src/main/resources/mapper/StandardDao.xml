@@ -58,5 +58,17 @@
 			</foreach>
 		</where>
 	</delete>
+	<select id="findAllStandard" resultType="com.think123.yr_online.dataobject.Standard">
+
+		select
+		standard_id,
+		standard_name,
+		standard_remark,
+		standard_status
+
+		from
+		info_standard
+
+	</select>
   
 </mapper>

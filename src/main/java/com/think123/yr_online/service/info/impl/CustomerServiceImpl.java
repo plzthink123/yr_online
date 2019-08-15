@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -71,5 +72,10 @@ public class CustomerServiceImpl implements CustomerService {
     public void deleteCustomer(Integer[] ids) {
         customerDao.delete(ids);
 
+    }
+
+    @Override
+    public List<Customer> getCustomerAll() {
+        return customerDao.findAll();
     }
 }

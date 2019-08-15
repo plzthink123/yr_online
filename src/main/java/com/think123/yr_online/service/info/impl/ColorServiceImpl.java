@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -71,5 +72,10 @@ public class ColorServiceImpl implements ColorService {
     public void deleteColor(Integer[] ids) {
         ColorDao.delete(ids);
 
+    }
+
+    @Override
+    public List<Color> getAllColor() {
+        return ColorDao.findAllColor();
     }
 }

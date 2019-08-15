@@ -9,7 +9,7 @@ import lombok.Data;
  */
 @Data
 //@TableName("sys_ur")
-public class SysUR {
+public class UR {
     //用户id
     //@TableField("u_id")
     private String uid;
