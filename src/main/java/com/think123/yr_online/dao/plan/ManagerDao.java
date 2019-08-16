@@ -33,4 +33,6 @@ public interface ManagerDao {
     void addPlan(PlanDto dto);
 
 	void modifyPlan(PlanDto dto);
+
+	void cancelPlan(PlanDto dto);
 }

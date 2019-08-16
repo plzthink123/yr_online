@@ -48,7 +48,13 @@ public class ManagerController {
     public Result customerExecUpd(@RequestBody PlanDto dto ) throws InterruptedException {
         log.info("dto: {}",dto);
         managerService.modifyPlan(dto);
-        return Result.successResult("修改客户信息成功！");
+        return Result.successResult("修改plan信息成功！");
+    }
+    @PutMapping("/manager/cancel")
+    public Result cancelUpd(@RequestBody PlanDto dto ) throws InterruptedException {
+        log.info("dto: {}",dto);
+        managerService.cancelPlan(dto);
+        return Result.successResult("修改plan信息成功！");
     }
 
 

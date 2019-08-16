@@ -1,8 +1,9 @@
-package com.think123.yr_online.service.plan;
+package com.think123.yr_online.service.plan.impl;
 
 import com.github.pagehelper.PageInfo;
 import com.think123.yr_online.dao.plan.ManagerDao;
 import com.think123.yr_online.dto.PlanDto;
+import com.think123.yr_online.service.plan.ManagerService;
 import com.think123.yr_online.util.Utils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ import java.util.Map;
 @Service
 @Slf4j
 @Transactional
-public class ManagerServiceImpl implements  ManagerService{
+public class ManagerServiceImpl implements ManagerService {
 
     private Integer id;
 
@@ -72,6 +73,11 @@ public class ManagerServiceImpl implements  ManagerService{
     @Override
     public void modifyPlan(PlanDto dto) {
         managerDao.modifyPlan(dto);
+    }
+
+    @Override
+    public void cancelPlan(PlanDto dto) {
+        managerDao.cancelPlan(dto);
     }
 
     /*@Override

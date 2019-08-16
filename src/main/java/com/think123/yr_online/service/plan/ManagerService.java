@@ -19,6 +19,8 @@ public interface ManagerService {
 
     void modifyPlan(PlanDto dto);
 
+    void cancelPlan(PlanDto dto);
+
    /* void addColor(ColorDto dto);
 
     void modifyColor(ColorDto dto);

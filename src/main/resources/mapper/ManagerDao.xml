@@ -160,6 +160,27 @@
 			plan_status=#{plan_status}
 
 			where plan_id=#{plan_id}
+
+	</update>
+	<update id="cancelPlan">
+		update bus_plan set standard_id=#{standard_id},
+			cus_id=#{cus_id},
+			co_id=#{co_id},
+			plan_xh=#{plan_xh},
+			plan_month=#{plan_month},
+			plan_num=#{plan_num},
+			plan_type=#{plan_type},
+			plan_date=#{plan_date},
+			plan_person=#{plan_person},
+			plan_status=#{plan_status}
+
+			where plan_id=#{plan_id}
+			and
+			plan_id not in
+			(select
+			plan_id
+			from bus_process)
+
 	</update>
   
 </mapper>
