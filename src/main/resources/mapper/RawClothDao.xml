@@ -120,4 +120,54 @@
         where
         process_id=#{process_id}
     </update>
+    <select id="findProcessListOnStatus5">
+        resultType="com.think123.yr_online.dto.ProcessDto">
+        select
+        process_id ,
+        plan_id ,
+        process_cus ,
+        process_std ,
+        process_color ,
+        group_num ,
+        group_date ,
+        group_person ,
+        pretreat_num ,
+        pretreat_date ,
+        pretreat_person ,
+        dye_num ,
+        dye_date ,
+        dye_person ,
+        print_num ,
+        print_date ,
+        print_person ,
+        arrange_num ,
+        arrange_date ,
+        arrange_person ,
+        check_num ,
+        check_date ,
+        check_person ,
+        process_status
+        from
+        bus_process
+        <where>
+
+            <if test="process_id != null ">
+                process_id like concat('%',#{process_id},'%')
+            </if>
+
+            <if test="process_cus != null ">
+                and process_cus like concat('%',#{process_cus},'%')
+            </if>
+            <if test="process_cus != null ">
+                and process_std like concat('%',#{process_std},'%')
+            </if>
+            <if test="process_status == '00'">
+                and process_status = '00'
+            </if>
+            <if test="process_status == '05'">
+                and process_status = '05'
+            </if>
+
+        </where>
+    </select>
 </mapper>

@@ -24,4 +24,6 @@ public interface RawclothService {
     void modifyProcess(ProcessDto dto);
 
     void modifyProcessStatus(ProcessDto dto);
+
+    Map<String, Object> getProcessPageOnStatus5(ProcessDto dto);
 }

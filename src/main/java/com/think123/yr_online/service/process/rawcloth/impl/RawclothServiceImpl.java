@@ -80,6 +80,18 @@ public class RawclothServiceImpl implements RawclothService {
     public void modifyProcessStatus(ProcessDto dto) {
         rawclothDao.modifyProcessStatus(dto);
     }
+
+    @Override
+    public Map<String, Object> getProcessPageOnStatus5(ProcessDto dto) {
+        PageInfo<ProcessDto> page = Utils.createPageInfo(dto, ()->{
+            List<ProcessDto> processDtoList=rawclothDao.findProcessList(dto);
+            for(ProcessDto processDto: processDtoList){
+                System.out.println();
+            }
+            return rawclothDao.findProcessListOnStatus5(dto);
+        });
+        return Utils.convert2PageData(page);
+    }
 /*
 
     @Autowired

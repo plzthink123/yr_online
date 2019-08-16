@@ -26,4 +26,6 @@ public interface RawclothDao {
     void modifyProcess(ProcessDto dto);
 
     void modifyProcessStatus(ProcessDto dto);
+
+     List<ProcessDto> findProcessListOnStatus5(ProcessDto dto);
 }
