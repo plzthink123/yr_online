@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.think123.yr_online.dao.process.PkgDao">
+    <select id="findProductListOnsStatusOn35"
+        resultType="com.think123.yr_online.dto.ProductDto">
+      select
+      product_id,
+      process_id,
+      product_cus,
+      product_std,
+      product_color,
+      product_level,
+      product_num,
+      product_status
+      from
+      bus_product
+        <where>
+            <if test="product_id != null ">
+                product_id like concat('%',#{product_id},'%')
+            </if>
+
+            <if test="product_std != null ">
+                and product_std like concat('%',#{product_std},'%')
+            </if>
+            <if test="1==1">
+                and product_status in ('35','40')
+            </if>
+        </where>
+    </select>
+    <update id="modifyProductStatus">
+        update bus_product
+        set
+        product_status=#{product_status}
+        where
+        product_id=#{product_id}
+
+    </update>
+    <update id="modifyProcessStatus" >
+        update bus_process
+        set
+        process_status=#{product_status}
+        where
+        process_id=#{process_id}
+
+    </update>
+</mapper>
+
+
+
+

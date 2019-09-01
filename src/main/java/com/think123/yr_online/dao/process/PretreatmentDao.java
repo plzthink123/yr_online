@@ -10,9 +10,7 @@ import java.util.List;
  */
 public interface PretreatmentDao {
 
-
-
-     List<ProcessDto> findProcessListOnStatus5(ProcessDto dto);
+    List<ProcessDto> findProcessListOnStatus5(ProcessDto dto);
 
     void modifyProcess(ProcessDto dto);
 }

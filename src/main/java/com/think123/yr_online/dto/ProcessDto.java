@@ -55,7 +55,7 @@ public class ProcessDto extends PageParam {
     private String check_date;
 
     private String check_person;
-//            00 未投坯
+    //            00 未投坯
 //            05 已投坯
 //            10 已前处理
 //            15 已染色
@@ -70,7 +70,6 @@ public class ProcessDto extends PageParam {
 //            65 已部分交货
 //            70 已交货
     private String process_status;
-
 
     private BigDecimal sumgroupnum;
 

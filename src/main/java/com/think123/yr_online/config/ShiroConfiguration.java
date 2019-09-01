@@ -40,6 +40,7 @@ public class ShiroConfiguration {
 
     /**
      * 配置跨域
+     *
      * @return
      */
     @Bean
@@ -84,8 +85,8 @@ public class ShiroConfiguration {
         return bean;
     }
 
-
-    @Bean @Autowired
+    @Bean
+    @Autowired
     public ShiroFilterChainDefinition shiroFilterChainDefinition(ShiroService shiroService) {
 
         DefaultShiroFilterChainDefinition chainDefinition =
@@ -100,24 +101,20 @@ public class ShiroConfiguration {
         chainDefinition.addPathDefinition("/js/**", "anon");
         chainDefinition.addPathDefinition("/safty/login/**", "anon");
 
-
         //加载动态权限
         List<Module> moduleList = shiroService.getAllSubModules();
 
         String PREMISSION_FORMAT = "authc,perms[{0}]";
-        String ROLE_FORMAT="authc,perms[{0}]";
-
+        String ROLE_FORMAT = "authc,perms[{0}]";
 
         //动态权限设置
-        for(Module module:moduleList) {
+        for (Module module : moduleList) {
 
-            if(StringUtils.isEmpty(module.getM_url())) {
+            if (StringUtils.isEmpty(module.getM_url())) {
                 continue;
             }
 
-
             chainDefinition.addPathDefinition(module.getM_url().replace("index.html", "**"), MessageFormat.format(PREMISSION_FORMAT, String.valueOf(module.getM_id())));
-
 
         }
 
@@ -132,19 +129,19 @@ public class ShiroConfiguration {
     }
 
     @Bean("shiroFilter")
-    public ShiroFilterFactoryBean shiroFilter(@Qualifier("securityManager")SecurityManager manager){
-        ShiroFilterFactoryBean bean=new ShiroFilterFactoryBean();
+    public ShiroFilterFactoryBean shiroFilter(@Qualifier("securityManager") SecurityManager manager) {
+        ShiroFilterFactoryBean bean = new ShiroFilterFactoryBean();
         bean.setSecurityManager(manager);
         bean.setLoginUrl("/loginTo");
         bean.setSuccessUrl("/index");
         bean.setUnauthorizedUrl("/unauthorized");
 
-        LinkedHashMap<String,String> filterChainDefinitionMap=new LinkedHashMap<>();
+        LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         //filterChainDefinitionMap.put("/index","authc");
-        filterChainDefinitionMap.put("/safty/login/**","anon");
-        filterChainDefinitionMap.put("/**","user");
+        filterChainDefinitionMap.put("/safty/login/**", "anon");
+        filterChainDefinitionMap.put("/**", "user");
 
-       /* *//* 需要认证 *//*
+        /* *//* 需要认证 *//*
         filterChainDefinitionMap.put("/*", "authc");
         filterChainDefinitionMap.put("/**", "authc");
         filterChainDefinitionMap.put("/*.*", "authc");*/
@@ -153,39 +150,40 @@ public class ShiroConfiguration {
     }
 
     @Bean("securityManager")
-    public SecurityManager securityManager(@Qualifier("authRealm") AuthRealm authRealm){
+    public SecurityManager securityManager(@Qualifier("authRealm") AuthRealm authRealm) {
         log.info("###################shiro开始加载##################");
-        DefaultWebSecurityManager manager=new DefaultWebSecurityManager();
+        DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
         manager.setRealm(authRealm);
         return manager;
     }
 
     @Bean("authRealm")
-    public AuthRealm authRealm(@Qualifier("credentialMatcher") CredentialMatcher matcher){
-        AuthRealm authRealm=new AuthRealm();
+    public AuthRealm authRealm(@Qualifier("credentialMatcher") CredentialMatcher matcher) {
+        AuthRealm authRealm = new AuthRealm();
         authRealm.setCredentialsMatcher(matcher);
         return authRealm;
     }
 
     //自定义密码比较器
     @Bean("credentialMatcher")
-    public CredentialMatcher credentialMatcher(){
+    public CredentialMatcher credentialMatcher() {
         return new CredentialMatcher();
     }
 
     @Bean
-    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(@Qualifier("securityManager") SecurityManager manager){
-        AuthorizationAttributeSourceAdvisor advisor=new AuthorizationAttributeSourceAdvisor();
+    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(@Qualifier("securityManager") SecurityManager manager) {
+        AuthorizationAttributeSourceAdvisor advisor = new AuthorizationAttributeSourceAdvisor();
         advisor.setSecurityManager(manager);
         return advisor;
     }
 
     @Bean
-    public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator(){
-        DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator=new DefaultAdvisorAutoProxyCreator();
+    public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {
+        DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator = new DefaultAdvisorAutoProxyCreator();
         defaultAdvisorAutoProxyCreator.setProxyTargetClass(true);
         return defaultAdvisorAutoProxyCreator;
     }
+
     /**
      * Cookie格式化
      *
@@ -198,6 +196,7 @@ public class ShiroConfiguration {
         simpleCookie.setValue(VALUE);
         return simpleCookie;
     }
+
     /**
      * Shiro生命周期处理器
      */
@@ -205,9 +204,5 @@ public class ShiroConfiguration {
     public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
         return new LifecycleBeanPostProcessor();
     }
-
-
-
-
 
 }

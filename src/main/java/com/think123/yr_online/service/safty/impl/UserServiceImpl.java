@@ -24,24 +24,17 @@ import java.util.Map;
 @Transactional
 public class UserServiceImpl implements UserService {
 
-
     @Autowired
     private UserDao UserDao;
-
-
-
-
 
     @Override
     public Map<String, Object> getUserPage(UserDto dto) {
 
-        PageInfo<User> page = Utils.createPageInfo(dto, ()->{
+        PageInfo<User> page = Utils.createPageInfo(dto, () -> {
 
             return UserDao.findUserList(dto);
         });
         return Utils.convert2PageData(page);
-
-
 
     }
 
@@ -50,7 +43,6 @@ public class UserServiceImpl implements UserService {
 
         //获得新编号
         UserDao.insert(dto);
-
 
     }
 
@@ -77,15 +69,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addRole(Integer[] movekeys,String u_id) {
-        for(int i=0;i <movekeys.length;i++){
+    public void addRole(Integer[] movekeys, String u_id) {
+        for (int i = 0; i < movekeys.length; i++) {
             UserDao.addRole(movekeys[i], u_id);
         }
     }
 
     @Override
     public void deleteRole(Integer[] movekeys, String u_id) {
-        for(int i=0;i <movekeys.length;i++){
+        for (int i = 0; i < movekeys.length; i++) {
             UserDao.deleteRole(movekeys[i], u_id);
         }
     }
@@ -107,7 +99,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void changePasswordById(String u_id, String pwd) {
-        UserDao.changePasswordById(u_id,pwd);
+        UserDao.changePasswordById(u_id, pwd);
     }
 
 }

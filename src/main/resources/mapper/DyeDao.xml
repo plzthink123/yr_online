@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.think123.yr_online.dao.process.DyeDao">
+    <select id="getAllDye" resultType="com.think123.yr_online.dataobject.Process">
+        select
+
+        pr.process_id,
+        pr.plan_id,
+        plan_type,
+        pr.process_cus,
+        pr.process_std,
+        pr.process_color,
+        pr.group_num,
+        pr.group_date,
+        pr.group_person,
+        pr.pretreat_num,
+        pr.dye_date,
+        pr.dye_person,
+        pr.dye_num,
+        pr.print_date,
+        pr.print_person,
+        pr.print_num,
+        pr.arrange_date,
+        pr.arrange_person,
+        pr.arrange_num,
+        pr.process_status
+
+
+        from
+        bus_process pr,
+        bus_plan p,
+        info_color co,
+        info_customer
+        cus,
+        info_standard s
+
+        <where>
+            pr.plan_id = p.plan_id and
+            co.co_id=p.co_id
+            and
+            cus.cus_id=p.cus_id
+            and
+            s.standard_id=p.standard_id
+            and process_status &gt;='10'
+            and plan_type
+            in (2,3)
+
+            <if test="plan_id != null ">
+                and pr.plan_id like concat('%',#{plan_id},'%')
+            </if>
+            <if test="process_status != null ">
+                and process_status like concat('%',#{process_status},'%')
+            </if>
+        </where>
+    </select>
+    <update id="updateDye">
+        	update bus_process set
+                dye_date=#{dye_date},
+                dye_person=#{dye_person},
+                dye_num=#{dye_num},
+
+                process_status=#{process_status}
+
+		    where
+		        process_id = #{process_id}
+
+    </update>
+
+
+</mapper>

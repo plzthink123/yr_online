@@ -33,7 +33,7 @@ public class LoginController {
     private UserService userService;
 
     @GetMapping("/login/{u_name}/{u_pwd}")
-    public Result dologin(@PathVariable("u_name") String u_name , @PathVariable("u_pwd")String u_pwd, HttpSession session) {
+    public Result dologin(@PathVariable("u_name") String u_name, @PathVariable("u_pwd") String u_pwd, HttpSession session) {
         UserDto userDto = new UserDto();
         userDto.setU_name(u_name);
         userDto.setU_pwd(u_pwd);
@@ -41,14 +41,14 @@ public class LoginController {
             Subject subject = SecurityUtils.getSubject();
             UsernamePasswordToken token = new UsernamePasswordToken(u_name, u_pwd);
             subject.login(token);
-            if(subject.isAuthenticated()) {
+            if (subject.isAuthenticated()) {
                 CurrUser currUser = (CurrUser) subject.getPrincipal();
 
                 List<Role> roles = userService.selectRoleByUserId(currUser.getUserId());
 
                 session.setAttribute("userRoles", roles);
                 session.setAttribute("CurrUser", currUser);
-                return Result.successResult("success",currUser);
+                return Result.successResult("success", currUser);
             }
             return Result.failResult("failed!");
         } catch (UnknownAccountException e) {

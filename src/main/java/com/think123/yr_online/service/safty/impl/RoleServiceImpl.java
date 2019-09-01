@@ -2,7 +2,6 @@ package com.think123.yr_online.service.safty.impl;
 
 import com.github.pagehelper.PageInfo;
 import com.think123.yr_online.dao.safty.RoleDao;
-import com.think123.yr_online.dao.safty.UserDao;
 import com.think123.yr_online.dataobject.Module;
 import com.think123.yr_online.dataobject.Role;
 import com.think123.yr_online.dto.RoleDto;
@@ -31,26 +30,23 @@ public class RoleServiceImpl implements RoleService {
     @Autowired
     private RoleDao roleDao;
 
-
     @PostConstruct//初始化方法注解
     public void init() {
-        id= roleDao.findMaxId();
+        id = roleDao.findMaxId();
     }
 
-    private synchronized Integer  getNewId() {
-        return  ++id;
+    private synchronized Integer getNewId() {
+        return ++id;
     }
 
     @Override
     public Map<String, Object> getRolePage(RoleDto dto) {
 
-        PageInfo<Role> page = Utils.createPageInfo(dto, ()->{
+        PageInfo<Role> page = Utils.createPageInfo(dto, () -> {
 
             return roleDao.findRoleList(dto);
         });
         return Utils.convert2PageData(page);
-
-
 
     }
 
@@ -60,7 +56,6 @@ public class RoleServiceImpl implements RoleService {
         //获得新编号
         dto.setRo_id(getNewId());
         roleDao.insert(dto);
-
 
     }
 
@@ -88,15 +83,15 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public void addModule(Integer[] movekeys, Integer ro_id) {
-        for(int i=0;i <movekeys.length;i++){
-           roleDao.addModule(movekeys[i],ro_id);
+        for (int i = 0; i < movekeys.length; i++) {
+            roleDao.addModule(movekeys[i], ro_id);
         }
     }
 
     @Override
     public void deleteRole(Integer[] movekeys, Integer ro_id) {
-        for(int i=0;i <movekeys.length;i++){
-            roleDao.deleteModule(movekeys[i],ro_id);
+        for (int i = 0; i < movekeys.length; i++) {
+            roleDao.deleteModule(movekeys[i], ro_id);
         }
     }
 }

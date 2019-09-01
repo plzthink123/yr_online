@@ -23,19 +23,19 @@ public class ManagerServiceImplTest {
 
     @Test
     public void getPlanPage() {
-        PlanDto planDto=new PlanDto();
-        List<Plan> plans=managerDao.findPlanList(planDto);
-        for (Plan plan:plans
-             ) {
+        PlanDto planDto = new PlanDto();
+        List<Plan> plans = managerDao.findPlanList(planDto);
+        for (Plan plan : plans
+        ) {
             System.out.println(plan);
         }
     }
 
     @Test
-    public void Test2OrderQuery(){
-        PlanDto planDto=new PlanDto();
+    public void Test2OrderQuery() {
+        PlanDto planDto = new PlanDto();
         List<PlanDto> plan_customerList = managerDao.findPlan_CustomerList(planDto);
-        for (PlanDto plan:plan_customerList
+        for (PlanDto plan : plan_customerList
         ) {
             System.out.println(plan);
         }

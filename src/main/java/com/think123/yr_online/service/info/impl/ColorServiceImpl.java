@@ -29,26 +29,23 @@ public class ColorServiceImpl implements ColorService {
     @Autowired
     private ColorDao ColorDao;
 
-
     @PostConstruct//初始化方法注解
     public void init() {
-        id=ColorDao.findMaxId();
+        id = ColorDao.findMaxId();
     }
 
-    private synchronized Integer  getNewId() {
-        return  ++id;
+    private synchronized Integer getNewId() {
+        return ++id;
     }
 
     @Override
     public Map<String, Object> getColorPage(ColorDto dto) {
 
-        PageInfo<Color> page = Utils.createPageInfo(dto, ()->{
+        PageInfo<Color> page = Utils.createPageInfo(dto, () -> {
 
             return ColorDao.findColorList(dto);
         });
         return Utils.convert2PageData(page);
-
-
 
     }
 
@@ -58,7 +55,6 @@ public class ColorServiceImpl implements ColorService {
         //获得新编号
         dto.setCo_id(getNewId());
         ColorDao.insert(dto);
-
 
     }
 

@@ -3,46 +3,44 @@ package com.think123.yr_online.dto;
 import java.util.List;
 
 public class MenuDto {
-	
-	private Integer menuId;
-	private String menuName;
-	
-	private String menuUrl;
-	
-	private List<MenuDto> subMenuList;
 
-	public Integer getMenuId() {
-		return menuId;
-	}
+    private Integer menuId;
+    private String menuName;
 
-	public void setMenuId(Integer menuId) {
-		this.menuId = menuId;
-	}
+    private String menuUrl;
 
-	public String getMenuName() {
-		return menuName;
-	}
+    private List<MenuDto> subMenuList;
 
-	public void setMenuName(String menuName) {
-		this.menuName = menuName;
-	}
+    public Integer getMenuId() {
+        return menuId;
+    }
 
-	public String getMenuUrl() {
-		return menuUrl;
-	}
+    public void setMenuId(Integer menuId) {
+        this.menuId = menuId;
+    }
 
-	public void setMenuUrl(String menuUrl) {
-		this.menuUrl = menuUrl;
-	}
+    public String getMenuName() {
+        return menuName;
+    }
 
-	public List<MenuDto> getSubMenuList() {
-		return subMenuList;
-	}
+    public void setMenuName(String menuName) {
+        this.menuName = menuName;
+    }
 
-	public void setSubMenuList(List<MenuDto> subMenuList) {
-		this.subMenuList = subMenuList;
-	}
-	
-	
+    public String getMenuUrl() {
+        return menuUrl;
+    }
+
+    public void setMenuUrl(String menuUrl) {
+        this.menuUrl = menuUrl;
+    }
+
+    public List<MenuDto> getSubMenuList() {
+        return subMenuList;
+    }
+
+    public void setSubMenuList(List<MenuDto> subMenuList) {
+        this.subMenuList = subMenuList;
+    }
 
 }

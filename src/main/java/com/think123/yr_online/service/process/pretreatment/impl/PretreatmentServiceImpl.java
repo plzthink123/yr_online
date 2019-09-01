@@ -18,9 +18,10 @@ import java.util.Map;
 public class PretreatmentServiceImpl implements PretreatmentService {
     @Autowired
     private PretreatmentDao pretreatmentDao;
+
     @Override
     public Map<String, Object> getProcessPageOnStatus5(ProcessDto dto) {
-        PageInfo<ProcessDto> page = Utils.createPageInfo(dto, ()->{
+        PageInfo<ProcessDto> page = Utils.createPageInfo(dto, () -> {
 
             return pretreatmentDao.findProcessListOnStatus5(dto);
         });

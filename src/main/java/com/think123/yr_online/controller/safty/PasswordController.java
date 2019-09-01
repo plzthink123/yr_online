@@ -22,25 +22,24 @@ public class PasswordController {
     @Autowired
     private UserService userService;
 
-
     @RequestMapping("/getCurrUser")
-    public Result getCurrUser(HttpSession session){
+    public Result getCurrUser(HttpSession session) {
         CurrUser currUser = (CurrUser) session.getAttribute("CurrUser");
-       String u_id= currUser.getUserId();
-       return Result.successResult("success",u_id);
+        String u_id = currUser.getUserId();
+        return Result.successResult("success", u_id);
     }
 
     @PutMapping("/pwd/{old_pwd}/{u_pwd}")
-    public Result changePWD(@PathVariable("old_pwd")String oldpwd,@PathVariable("u_pwd")String pwd,HttpSession session){
-        CurrUser currUser = (CurrUser)session.getAttribute("CurrUser");
-        String u_id=currUser.getUserId();
-        String db_old_pwd=userService.findOldPasswordById(u_id);
-        if(!db_old_pwd.equals(oldpwd)){
+    public Result changePWD(@PathVariable("old_pwd") String oldpwd, @PathVariable("u_pwd") String pwd, HttpSession session) {
+        CurrUser currUser = (CurrUser) session.getAttribute("CurrUser");
+        String u_id = currUser.getUserId();
+        String db_old_pwd = userService.findOldPasswordById(u_id);
+        if (!db_old_pwd.equals(oldpwd)) {
             return Result.failResult("原密码输入错误!");
         }
-        userService.changePasswordById(u_id,pwd);
+        userService.changePasswordById(u_id, pwd);
         SecurityUtils.getSubject().logout();
-       return  Result.successResult("密码修改成功!");
+        return Result.successResult("密码修改成功!");
     }
 
 }

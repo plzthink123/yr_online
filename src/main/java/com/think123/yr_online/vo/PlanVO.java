@@ -10,7 +10,7 @@ import java.util.Date;
  * @author plzthink123
  * 2019-08-15 13:56
  */
-public class PlanVO  extends PageParam {
+public class PlanVO extends PageParam {
     //计划单id
     private Integer plan_id;
     //标准id
@@ -28,7 +28,7 @@ public class PlanVO  extends PageParam {
     //计划类型
     private Integer plan_type;
     //计划下达日期
-    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date plan_date;
     //计划登记人
     private String plan_person;

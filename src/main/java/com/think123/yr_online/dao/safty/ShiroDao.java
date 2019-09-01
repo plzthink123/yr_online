@@ -12,6 +12,8 @@ import java.util.List;
  */
 public interface ShiroDao {
     List<Module> getAllSubModules();
+
     User getUser(@Param("u_id") String userId);
+
     List<Module> getModulesOfUser(@Param("u_id") String userId);
 }

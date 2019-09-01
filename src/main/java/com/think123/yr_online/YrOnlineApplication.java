@@ -18,25 +18,25 @@ public class YrOnlineApplication {
         SpringApplication.run(YrOnlineApplication.class, args);
     }
 
-        @Bean
-        public WebMvcConfigurer corsConfigurer(){
-            return new WebMvcConfigurer() {
-                @Override
-                public void addCorsMappings(CorsRegistry registry) {
-                    registry.addMapping("/**")
-                            .allowCredentials(true)
-                            .allowedMethods("*");
-                }
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**")
+                        .allowCredentials(true)
+                        .allowedMethods("*");
+            }
 
-                @Override
-                public void addViewControllers(ViewControllerRegistry registry) {
-                    registry.addRedirectViewController("/","/safty/login/index.html");
-                }
-            };
-        }
+            @Override
+            public void addViewControllers(ViewControllerRegistry registry) {
+                registry.addRedirectViewController("/", "/safty/login/index.html");
+            }
+        };
+    }
 
-        @Bean
-        public ShiroService shiroService(){
-            return new ShiroServiceImpl();
-        }
+    @Bean
+    public ShiroService shiroService() {
+        return new ShiroServiceImpl();
+    }
 }

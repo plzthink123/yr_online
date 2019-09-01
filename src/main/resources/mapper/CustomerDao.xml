@@ -1,69 +1,69 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.think123.yr_online.dao.info.CustomerDao">
-	<select id="findCustomerList"
-			resultType="com.think123.yr_online.dataobject.Customer">
+    <select id="findCustomerList"
+            resultType="com.think123.yr_online.dataobject.Customer">
 
-		select
-		cus_id,
-		cus_name,
-		cus_remark,
-		cus_status
+        select
+        cus_id,
+        cus_name,
+        cus_remark,
+        cus_status
 
-		from
-		info_customer
+        from
+        info_customer
 
-		<where>
+        <where>
 
-			<if test="cus_id != null ">
-				cus_id like concat('%',#{cus_id},'%')
-			</if>
+            <if test="cus_id != null ">
+                cus_id like concat('%',#{cus_id},'%')
+            </if>
 
-			<if test="cus_name != null ">
-				and cus_name like concat('%',#{cus_name},'%')
-			</if>
+            <if test="cus_name != null ">
+                and cus_name like concat('%',#{cus_name},'%')
+            </if>
 
-			<if test="cus_remark != null ">
-				and cus_remark like concat('%',#{cus_remark},'%')
-			</if>
-			<if test="cus_status == '00' ">
-				and cus_status = '00'
-			</if>
-			<if test="cus_status == '22' ">
-				and cus_status = '22'
-			</if>
-			<if test="cus_status == '55' ">
-				and cus_status = '55'
-			</if>
-			<if test="cus_status == '77' ">
-				and cus_status = '77'
-			</if>
-			<if test="cus_status == '99' ">
-				and cus_status = '99'
-			</if>
+            <if test="cus_remark != null ">
+                and cus_remark like concat('%',#{cus_remark},'%')
+            </if>
+            <if test="cus_status == '00' ">
+                and cus_status = '00'
+            </if>
+            <if test="cus_status == '22' ">
+                and cus_status = '22'
+            </if>
+            <if test="cus_status == '55' ">
+                and cus_status = '55'
+            </if>
+            <if test="cus_status == '77' ">
+                and cus_status = '77'
+            </if>
+            <if test="cus_status == '99' ">
+                and cus_status = '99'
+            </if>
 
-		</where>
+        </where>
 
-	</select>
+    </select>
 
-	<delete id="delete">
-		delete from info_customer
-		<where>
-			<foreach item="item"  collection="array" open=""
-					 separator="or" close="">
-				cus_id = #{item}
-			</foreach>
-		</where>
-	</delete>
-	<select id="findAll" resultType="com.think123.yr_online.dataobject.Customer">
-		select 	cus_id,
-				cus_name,
-				cus_remark,
-				cus_status
-		  from info_customer
-	</select>
-  
+    <delete id="delete">
+        delete from info_customer
+        <where>
+            <foreach item="item" collection="array" open=""
+                     separator="or" close="">
+                cus_id = #{item}
+            </foreach>
+        </where>
+    </delete>
+    <select id="findAll" resultType="com.think123.yr_online.dataobject.Customer">
+        select cus_id,
+        cus_name,
+        cus_remark,
+        cus_status
+        from info_customer
+    </select>
+
 </mapper>

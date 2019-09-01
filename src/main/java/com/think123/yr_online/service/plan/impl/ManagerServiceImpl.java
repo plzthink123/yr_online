@@ -29,27 +29,21 @@ public class ManagerServiceImpl implements ManagerService {
 
     @PostConstruct//初始化方法注解
     public void init() {
-        id= managerDao.findMaxId();
+        id = managerDao.findMaxId();
     }
 
-    private synchronized Integer  getNewId() {
-        return  ++id;
+    private synchronized Integer getNewId() {
+        return ++id;
     }
-
-
 
     @Override
     public Map<String, Object> getPlanPage(PlanDto dto) {
 
-        PageInfo<PlanDto> page = Utils.createPageInfo(dto, ()->{
-
-
+        PageInfo<PlanDto> page = Utils.createPageInfo(dto, () -> {
 
             return managerDao.findPlan_CustomerList(dto);
         });
         return Utils.convert2PageData(page);
-
-
 
     }
 
@@ -66,7 +60,7 @@ public class ManagerServiceImpl implements ManagerService {
     @Override
     public void addPlan(PlanDto dto) {
         dto.setPlan_id(getNewId());
-       log.info("managerServiceImpl check  dto value = {}",dto);
+        log.info("managerServiceImpl check  dto value = {}", dto);
         managerDao.addPlan(dto);
     }
 

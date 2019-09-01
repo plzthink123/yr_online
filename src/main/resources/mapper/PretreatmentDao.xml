@@ -7,7 +7,7 @@
 
 
     <select id="findProcessListOnStatus5"
-        resultType="com.think123.yr_online.dto.ProcessDto">
+            resultType="com.think123.yr_online.dto.ProcessDto">
         select
         process_id ,
         plan_id ,
@@ -59,11 +59,11 @@
     <update id="modifyProcess">
         update bus_process
         set
-            pretreat_num=#{pretreat_num},
-            pretreat_date=#{pretreat_date},
-            pretreat_person=#{pretreat_person},
-            process_status='10'
+        pretreat_num=#{pretreat_num},
+        pretreat_date=#{pretreat_date},
+        pretreat_person=#{pretreat_person},
+        process_status='10'
         where
-            process_id=#{process_id}
+        process_id=#{process_id}
     </update>
 </mapper>

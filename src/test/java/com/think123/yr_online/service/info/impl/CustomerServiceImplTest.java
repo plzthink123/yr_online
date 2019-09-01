@@ -23,11 +23,11 @@ public class CustomerServiceImplTest {
 
     @Test
     public void getCustomerPage() {
-        CustomerDto customerDto =new CustomerDto();
+        CustomerDto customerDto = new CustomerDto();
         customerDto.setPageNum(1);
         customerDto.setPageSize(5);
 
-        PageInfo<Customer> page = Utils.createPageInfo(customerDto, ()->{
+        PageInfo<Customer> page = Utils.createPageInfo(customerDto, () -> {
             return customerDao.findCustomerList(customerDto);
         });
         System.out.println(page);

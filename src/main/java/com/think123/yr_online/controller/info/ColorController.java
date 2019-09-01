@@ -21,36 +21,35 @@ public class ColorController {
     private ColorService colorService;
 
     @GetMapping("/color")
-    public Map<String,Object> colorExecQuery(ColorDto dto){
-
+    public Map<String, Object> colorExecQuery(ColorDto dto) {
 
         return colorService.getColorPage(dto);
 
     }
+
     @GetMapping("/color/all")
-    public Result colorExecQueryAll(){
+    public Result colorExecQueryAll() {
 
-
-        return Result.successResult("success",colorService.getAllColor());
+        return Result.successResult("success", colorService.getAllColor());
 
     }
 
     @PostMapping("/color")
-    public Result colorExecAdd(@RequestBody ColorDto dto ) throws InterruptedException {
+    public Result colorExecAdd(@RequestBody ColorDto dto) throws InterruptedException {
         Thread.sleep(2000);
         colorService.addColor(dto);
         return Result.successResult("新增花色信息成功！");
     }
 
     @PutMapping("/color")
-    public Result colorExecUpd(@RequestBody ColorDto dto ) throws InterruptedException {
-        log.info("dto: {}",dto);
+    public Result colorExecUpd(@RequestBody ColorDto dto) throws InterruptedException {
+        log.info("dto: {}", dto);
         colorService.modifyColor(dto);
         return Result.successResult("修改花色信息成功！");
     }
 
     @DeleteMapping("/color")
-    public Result colorExecDel(@RequestBody Integer[] ids ) throws InterruptedException {
+    public Result colorExecDel(@RequestBody Integer[] ids) throws InterruptedException {
 
         colorService.deleteColor(ids);
         return Result.successResult("删除花色信息成功！");

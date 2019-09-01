@@ -29,26 +29,23 @@ public class CustomerServiceImpl implements CustomerService {
     @Autowired
     private CustomerDao customerDao;
 
-
     @PostConstruct//初始化方法注解
     public void init() {
-        id=customerDao.findMaxId();
+        id = customerDao.findMaxId();
     }
 
-    private synchronized int  getNewId() {
-        return  ++id;
+    private synchronized int getNewId() {
+        return ++id;
     }
 
     @Override
     public Map<String, Object> getCustomerPage(CustomerDto dto) {
 
-        PageInfo<Customer> page = Utils.createPageInfo(dto, ()->{
+        PageInfo<Customer> page = Utils.createPageInfo(dto, () -> {
 
             return customerDao.findCustomerList(dto);
         });
         return Utils.convert2PageData(page);
-
-
 
     }
 
@@ -58,7 +55,6 @@ public class CustomerServiceImpl implements CustomerService {
         //获得新编号
         dto.setCus_id(getNewId());
         customerDao.insert(dto);
-
 
     }
 

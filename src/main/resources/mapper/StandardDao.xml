@@ -1,74 +1,74 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.think123.yr_online.dao.info.StandardDao">
-	<select id="findStandardList"
-			resultType="com.think123.yr_online.dataobject.Standard">
+    <select id="findStandardList"
+            resultType="com.think123.yr_online.dataobject.Standard">
 
-		select
-		standard_id,
-		standard_name,
-		standard_remark,
-		standard_status
+        select
+        standard_id,
+        standard_name,
+        standard_remark,
+        standard_status
 
-		from
-		info_standard
+        from
+        info_standard
 
-		<where>
+        <where>
 
-			<if test="standard_id != null ">
-				standard_id like concat('%',#{standard_id},'%')
-			</if>
+            <if test="standard_id != null ">
+                standard_id like concat('%',#{standard_id},'%')
+            </if>
 
-			<if test="standard_name != null ">
-				and standard_name like concat('%',#{standard_name},'%')
-			</if>
+            <if test="standard_name != null ">
+                and standard_name like concat('%',#{standard_name},'%')
+            </if>
 
-			<if test="standard_remark != null ">
-				and standard_remark like concat('%',#{standard_remark},'%')
-			</if>
-			<if test="standard_status == '00' ">
-				and standard_status = '00'
-			</if>
-			<if test="standard_status == '22' ">
-				and standard_status = '22'
-			</if>
-			<if test="standard_status == '55' ">
-				and standard_status = '55'
-			</if>
-			<if test="standard_status == '77' ">
-				and standard_status = '77'
-			</if>
-			<if test="standard_status == '99' ">
-				and standard_status = '99'
-			</if>
+            <if test="standard_remark != null ">
+                and standard_remark like concat('%',#{standard_remark},'%')
+            </if>
+            <if test="standard_status == '00' ">
+                and standard_status = '00'
+            </if>
+            <if test="standard_status == '22' ">
+                and standard_status = '22'
+            </if>
+            <if test="standard_status == '55' ">
+                and standard_status = '55'
+            </if>
+            <if test="standard_status == '77' ">
+                and standard_status = '77'
+            </if>
+            <if test="standard_status == '99' ">
+                and standard_status = '99'
+            </if>
 
-		</where>
+        </where>
 
-	</select>
+    </select>
 
-	<delete id="delete">
-		delete from info_standard
-		<where>
-			<foreach item="item"  collection="array" open=""
-					 separator="or" close="">
-				standard_id = #{item}
-			</foreach>
-		</where>
-	</delete>
-	<select id="findAllStandard" resultType="com.think123.yr_online.dataobject.Standard">
+    <delete id="delete">
+        delete from info_standard
+        <where>
+            <foreach item="item" collection="array" open=""
+                     separator="or" close="">
+                standard_id = #{item}
+            </foreach>
+        </where>
+    </delete>
+    <select id="findAllStandard" resultType="com.think123.yr_online.dataobject.Standard">
 
-		select
-		standard_id,
-		standard_name,
-		standard_remark,
-		standard_status
+        select
+        standard_id,
+        standard_name,
+        standard_remark,
+        standard_status
 
-		from
-		info_standard
+        from
+        info_standard
 
-	</select>
-  
+    </select>
+
 </mapper>

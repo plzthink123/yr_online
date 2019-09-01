@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.think123.yr_online.dao.process.PrintDao">
+    <select id="getAllPrint"
+            resultType="com.think123.yr_online.dataobject.Process">
+
+        select
+
+        pr.process_id,
+        pr.plan_id,
+        plan_type,
+        pr.process_cus,
+        pr.process_std,
+        pr.process_color,
+        pr.group_num,
+        pr.group_date,
+        pr.group_person,
+        pr.pretreat_num,
+        pr.print_date,
+        pr.print_person,
+        pr.print_num,
+        pr.arrange_date,
+        pr.arrange_person,
+        pr.arrange_num,
+        pr.process_status
+
+
+        from
+        bus_process pr,
+        bus_plan p,
+        info_color co,
+        info_customer
+        cus,
+        info_standard s
+
+        <where>
+            pr.plan_id = p.plan_id and
+            co.co_id=p.co_id
+            and
+            cus.cus_id=p.cus_id
+            and
+            s.standard_id=p.standard_id
+
+            <if test="plan_type=3 and process_status>=10 ">
+                p.plan_type=3 and pr.process_status>=10
+            </if>
+            <if test="plan_type=4 and process_status>=15 ">
+                and p.plan_type=4 and pr.process_status>=15
+            </if>
+
+            <if test="plan_id != null ">
+                and pr.plan_id like concat('%',#{plan_id},'%')
+            </if>
+            <if test="process_status != null ">
+                and process_status like concat('%',#{process_status},'%')
+            </if>
+
+
+        </where>
+    </select>
+
+    <update id="updatePrint">
+		update bus_process set
+		print_date=#{print_date},
+		print_person=#{print_person},
+		print_num=#{print_num},
+
+		process_status=#{process_status}
+
+		where
+		process_id = #{process_id}
+
+	</update>
+
+</mapper>

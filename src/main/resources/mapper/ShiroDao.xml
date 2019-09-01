@@ -1,193 +1,192 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.think123.yr_online.dao.safty.ShiroDao">
-	
-	<resultMap id="userMap" type="com.think123.yr_online.dataobject.User">
-		<id  property="u_id" column="u_id"/>
-		<result property="u_name" column="u_name"/>
-		<result property="u_pwd" column="u_pwd"/>
-		<result property="u_status" column="u_status"/>
-		<collection property="roles" ofType="com.think123.yr_online.dataobject.Role">
-			<id property="ro_id" column="ro_id"/>
-			<result property="ro_name" column="ro_name"/>
-			<result property="ro_remark" column="ro_remark"/>
-			<result property="ro_status" column="ro_status"/>
-			<collection property="modules" ofType="com.think123.yr_online.dataobject.Module">
-				<id property="m_id" column="m_id"></id>
-				<result property="m_name" column="m_name"/>
-				<result property="m_ismenu" column="m_ismenu"/>
-				<result property="m_pid" column="m_pid"/>
-				<result property="m_status" column="m_status"/>
-				<result property="m_url" column="m_url"/>
-			</collection>
-		</collection>
-	</resultMap>
-	
-	
-	<select id="findUserList"
-			resultType="com.think123.yr_online.dataobject.User">
 
-		select
-		u_id,
-		u_name,
-		u_pwd,
-		u_status
-
-		from
-		sys_user
-
-		<where>
-
-			<if test="u_id != null ">
-				u_id like concat('%',#{u_id},'%')
-			</if>
-
-			<if test="u_name != null ">
-				and u_name like concat('%',#{u_name},'%')
-			</if>
-			<if test="u_status == '00' ">
-				and u_status = '00'
-			</if>
-			<if test="u_status == '22' ">
-				and u_status = '22'
-			</if>
-			<if test="u_status == '55' ">
-				and u_status = '55'
-			</if>
-			<if test="u_status == '77' ">
-				and u_status = '77'
-			</if>
-			<if test="u_status == '99' ">
-				and u_status = '99'
-			</if>
-
-		</where>
-
-	</select>
+    <resultMap id="userMap" type="com.think123.yr_online.dataobject.User">
+        <id property="u_id" column="u_id"/>
+        <result property="u_name" column="u_name"/>
+        <result property="u_pwd" column="u_pwd"/>
+        <result property="u_status" column="u_status"/>
+        <collection property="roles" ofType="com.think123.yr_online.dataobject.Role">
+            <id property="ro_id" column="ro_id"/>
+            <result property="ro_name" column="ro_name"/>
+            <result property="ro_remark" column="ro_remark"/>
+            <result property="ro_status" column="ro_status"/>
+            <collection property="modules" ofType="com.think123.yr_online.dataobject.Module">
+                <id property="m_id" column="m_id"></id>
+                <result property="m_name" column="m_name"/>
+                <result property="m_ismenu" column="m_ismenu"/>
+                <result property="m_pid" column="m_pid"/>
+                <result property="m_status" column="m_status"/>
+                <result property="m_url" column="m_url"/>
+            </collection>
+        </collection>
+    </resultMap>
 
 
-	<delete id="delete">
-		delete from sys_user
-		<where>
-			<foreach item="item"  collection="array" open=""
-					 separator="or" close="">
-				u_id = #{item}
-			</foreach>
-		</where>
-	</delete>
+    <select id="findUserList"
+            resultType="com.think123.yr_online.dataobject.User">
 
-	<update id="update">
-		update sys_user
-		set u_name=#{u_name} ,
-			u_pwd=#{u_pwd} ,
-			u_status=#{u_status}
-		where u_id=#{u_id}
-	</update>
-	<select id="getAllRole" resultType="com.think123.yr_online.dataobject.Role">
-		select 	ro_id,
-		 		ro_name,
-		 		ro_remark
-		  from sys_role
-		  where ro_status ='55'
-	</select>
-	<select id="getOneUserRole" resultType="com.think123.yr_online.dataobject.Role">
-			select   ro_id,
-					  ro_name,
-					  ro_remark,
-					  ro_status
-			 from sys_role where ro_id
-			in
-		  	(select
-		 		ro_id
-		  	from sys_ur
-		 	 where u_id=#{u_id})
-		  	</select>
-	<insert id="addRole">
-		insert into sys_ur
-		  values(#{u_id},#{ro_id})
-	</insert>
-	<delete id="deleteRole">
-		delete from sys_ur where ro_id=#{ro_id} and u_id=#{u_id}
-	</delete>
+        select
+        u_id,
+        u_name,
+        u_pwd,
+        u_status
 
-	<select id="findByUserName" resultMap="userMap" parameterType="string">
-		select 	u.u_id,
-			  	u.u_name,
-			  	u.u_status,
-			  	u.u_pwd,
-			  	r.ro_id,
-			  	r.ro_status,
-			  	r.ro_remark,
-			  	r.ro_name,
-			  	m.m_id,
-				m.m_pid,
-				m.m_name,
-				m.m_url,
-				m.m_ismenu,
-				m.m_status
-		from sys_user u
-			inner join sys_ur ur on ur.u_id=u.u_id
-			inner join sys_role r on r.ro_id = ur.ro_id
-			inner join sys_rm rm on rm.ro_id=ur.ro_id
-			inner join sys_module m on m.m_id=rm.m_id
-		where u.u_name=#{u_name}
-	</select>
-	<select id="findRoleByUserId" resultType="com.think123.yr_online.dataobject.Role">
-		select r.ro_id,
-				r.ro_name,
-				r.ro_status
-			  from sys_role r
-			  left  join sys_ur ur on ur.ro_id=r.ro_id
-			  where
-			  	r.ro_status= 55
-			  	and ur.u_id = #{u_id}
-	</select>
+        from
+        sys_user
+
+        <where>
+
+            <if test="u_id != null ">
+                u_id like concat('%',#{u_id},'%')
+            </if>
+
+            <if test="u_name != null ">
+                and u_name like concat('%',#{u_name},'%')
+            </if>
+            <if test="u_status == '00' ">
+                and u_status = '00'
+            </if>
+            <if test="u_status == '22' ">
+                and u_status = '22'
+            </if>
+            <if test="u_status == '55' ">
+                and u_status = '55'
+            </if>
+            <if test="u_status == '77' ">
+                and u_status = '77'
+            </if>
+            <if test="u_status == '99' ">
+                and u_status = '99'
+            </if>
+
+        </where>
+
+    </select>
 
 
+    <delete id="delete">
+        delete from sys_user
+        <where>
+            <foreach item="item" collection="array" open=""
+                     separator="or" close="">
+                u_id = #{item}
+            </foreach>
+        </where>
+    </delete>
 
-	<select id="getModulesOfUser" resultType="com.think123.yr_online.dataobject.Module">
-		select m.m_id,
-				m.m_pid,
-				m.m_name,
-				m.m_url,
-				m.m_ismenu,
-				m.m_status
-		  from
-		  sys_user u
-			inner join sys_ur ur on ur.u_id=u.u_id
-			inner join sys_role r on r.ro_id = ur.ro_id
-			inner join sys_rm rm on rm.ro_id=ur.ro_id
-			inner join sys_module m on m.m_id=rm.m_id
-		where u.u_id=#{u_id}
-	</select>
-	<select id="getUser" resultType="com.think123.yr_online.dataobject.User">
-		select
-		 u_id,
-		 u_name,
-		 u_pwd,
-		 u_status
-		 from sys_user where u_id=#{u_id}
-	</select>
-	<select id="getAllSubModules" resultType="com.think123.yr_online.dataobject.Module">
-		  select
-		  		m_id,
-				m_pid,
-				m_name,
-				m_url,
-				m_ismenu,
-				m_status
-		  from sys_module
-	</select>
-	<select id="getAllRoles" resultType="com.think123.yr_online.dataobject.Role">
-		select ro_id,
-				ro_name,
-				ro_status
-				from
-				sys_role
-			   where
-			  	ro_status= 55
-	</select>
+    <update id="update">
+        update sys_user
+        set u_name=#{u_name} ,
+        u_pwd=#{u_pwd} ,
+        u_status=#{u_status}
+        where u_id=#{u_id}
+    </update>
+    <select id="getAllRole" resultType="com.think123.yr_online.dataobject.Role">
+        select ro_id,
+        ro_name,
+        ro_remark
+        from sys_role
+        where ro_status ='55'
+    </select>
+    <select id="getOneUserRole" resultType="com.think123.yr_online.dataobject.Role">
+        select ro_id,
+        ro_name,
+        ro_remark,
+        ro_status
+        from sys_role where ro_id
+        in
+        (select
+        ro_id
+        from sys_ur
+        where u_id=#{u_id})
+    </select>
+    <insert id="addRole">
+        insert into sys_ur
+        values(#{u_id},#{ro_id})
+    </insert>
+    <delete id="deleteRole">
+        delete from sys_ur where ro_id=#{ro_id} and u_id=#{u_id}
+    </delete>
+
+    <select id="findByUserName" resultMap="userMap" parameterType="string">
+        select u.u_id,
+        u.u_name,
+        u.u_status,
+        u.u_pwd,
+        r.ro_id,
+        r.ro_status,
+        r.ro_remark,
+        r.ro_name,
+        m.m_id,
+        m.m_pid,
+        m.m_name,
+        m.m_url,
+        m.m_ismenu,
+        m.m_status
+        from sys_user u
+        inner join sys_ur ur on ur.u_id=u.u_id
+        inner join sys_role r on r.ro_id = ur.ro_id
+        inner join sys_rm rm on rm.ro_id=ur.ro_id
+        inner join sys_module m on m.m_id=rm.m_id
+        where u.u_name=#{u_name}
+    </select>
+    <select id="findRoleByUserId" resultType="com.think123.yr_online.dataobject.Role">
+        select r.ro_id,
+        r.ro_name,
+        r.ro_status
+        from sys_role r
+        left join sys_ur ur on ur.ro_id=r.ro_id
+        where
+        r.ro_status= 55
+        and ur.u_id = #{u_id}
+    </select>
+
+
+    <select id="getModulesOfUser" resultType="com.think123.yr_online.dataobject.Module">
+        select m.m_id,
+        m.m_pid,
+        m.m_name,
+        m.m_url,
+        m.m_ismenu,
+        m.m_status
+        from
+        sys_user u
+        inner join sys_ur ur on ur.u_id=u.u_id
+        inner join sys_role r on r.ro_id = ur.ro_id
+        inner join sys_rm rm on rm.ro_id=ur.ro_id
+        inner join sys_module m on m.m_id=rm.m_id
+        where u.u_id=#{u_id}
+    </select>
+    <select id="getUser" resultType="com.think123.yr_online.dataobject.User">
+        select
+        u_id,
+        u_name,
+        u_pwd,
+        u_status
+        from sys_user where u_id=#{u_id}
+    </select>
+    <select id="getAllSubModules" resultType="com.think123.yr_online.dataobject.Module">
+        select
+        m_id,
+        m_pid,
+        m_name,
+        m_url,
+        m_ismenu,
+        m_status
+        from sys_module
+    </select>
+    <select id="getAllRoles" resultType="com.think123.yr_online.dataobject.Role">
+        select ro_id,
+        ro_name,
+        ro_status
+        from
+        sys_role
+        where
+        ro_status= 55
+    </select>
 </mapper>

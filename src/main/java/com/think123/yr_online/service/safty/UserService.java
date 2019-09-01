@@ -24,9 +24,9 @@ public interface UserService {
 
     List<Role> getOneUserRole(String u_id);
 
-    void addRole(Integer[] movekeys,String u_id);
+    void addRole(Integer[] movekeys, String u_id);
 
-    void deleteRole(Integer[] movekeys,String u_id);
+    void deleteRole(Integer[] movekeys, String u_id);
 
     User findByUsername(String username);
 

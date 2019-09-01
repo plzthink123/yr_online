@@ -29,26 +29,23 @@ public class StandardServiceImpl implements StandardService {
     @Autowired
     private StandardDao standardDao;
 
-
     @PostConstruct//初始化方法注解
     public void init() {
-        id=standardDao.findMaxId();
+        id = standardDao.findMaxId();
     }
 
-    private synchronized Integer  getNewId() {
-        return  ++id;
+    private synchronized Integer getNewId() {
+        return ++id;
     }
 
     @Override
     public Map<String, Object> getStandardPage(StandardDto dto) {
 
-        PageInfo<Standard> page = Utils.createPageInfo(dto, ()->{
+        PageInfo<Standard> page = Utils.createPageInfo(dto, () -> {
 
             return standardDao.findStandardList(dto);
         });
         return Utils.convert2PageData(page);
-
-
 
     }
 
@@ -56,10 +53,9 @@ public class StandardServiceImpl implements StandardService {
     public void addStandard(StandardDto dto) {
 
         //获得新编号
-        Integer newId=getNewId();
+        Integer newId = getNewId();
         dto.setStandard_id(newId);
         standardDao.insert(dto);
-
 
     }
 

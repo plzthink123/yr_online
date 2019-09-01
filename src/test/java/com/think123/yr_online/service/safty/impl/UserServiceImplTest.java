@@ -24,9 +24,9 @@ public class UserServiceImplTest {
 
     @Test
     public void getUserPage() {
-        UserDto userDto=new UserDto();
+        UserDto userDto = new UserDto();
         List<User> list = userDao.findUserList(userDto);
-        for(User user:list){
+        for (User user : list) {
             System.out.println(user);
         }
         System.out.println("===============");
@@ -35,7 +35,7 @@ public class UserServiceImplTest {
 
     @Test
     public void addUser() {
-        UserDto userDto=new UserDto();
+        UserDto userDto = new UserDto();
         userDto.setU_id("123");
         userDto.setU_name("test");
         userDto.setU_pwd("000");
@@ -50,38 +50,37 @@ public class UserServiceImplTest {
     @Test
     public void deleteUser() {
 
-
     }
 
     @Test
-    public void getAllRole(){
+    public void getAllRole() {
         List<Role> allRole = userDao.getAllRole();
         for (Role role : allRole
-             ) {
+        ) {
             System.out.println(role);
         }
     }
 
     @Test
-    public void getOneUserRole(){
-        List<Role> oneRole=userDao.getOneUserRole("admin");
+    public void getOneUserRole() {
+        List<Role> oneRole = userDao.getOneUserRole("admin");
         for (Role role : oneRole
         ) {
             System.out.println(role);
         }
     }
 
-
     @Test
-    public void findbyUserNmae(){
+    public void findbyUserNmae() {
         User user = userDao.findByUserName("admin");
         System.out.println(user);
     }
+
     @Test
-    public void findByUserId(){
-        List<Role> roles=userDao.findRoleByUserId("admin");
-        for (Role role: roles
-             ) {
+    public void findByUserId() {
+        List<Role> roles = userDao.findRoleByUserId("admin");
+        for (Role role : roles
+        ) {
             System.out.println(role);
         }
     }

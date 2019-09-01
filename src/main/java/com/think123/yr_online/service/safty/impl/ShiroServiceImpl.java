@@ -15,6 +15,7 @@ import java.util.List;
 public class ShiroServiceImpl implements ShiroService {
     @Autowired
     private ShiroDao shiroDao;
+
     @Override
     public List<Module> getAllSubModules() {
         return shiroDao.getAllSubModules();

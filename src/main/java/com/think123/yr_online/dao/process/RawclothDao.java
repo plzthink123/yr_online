@@ -13,11 +13,12 @@ import java.util.List;
  */
 public interface RawclothDao {
 
-     List<ProcessDto> findProcessList(ProcessDto dto);
+    List<ProcessDto> findProcessList(ProcessDto dto);
 
-      List<ProcessDto> findProcessPlanList(@Param("plan_id") Integer plan_id);
+    List<ProcessDto> findProcessPlanList(@Param("plan_id") Integer plan_id);
 
     void addProcess(ProcessDto dto);
+
     @Select("select max(process_id) from bus_process")
     BigDecimal findMaxId();
 
@@ -27,5 +28,5 @@ public interface RawclothDao {
 
     void modifyProcessStatus(ProcessDto dto);
 
-     List<ProcessDto> findProcessListOnStatus5(ProcessDto dto);
+    List<ProcessDto> findProcessListOnStatus5(ProcessDto dto);
 }

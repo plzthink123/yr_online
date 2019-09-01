@@ -37,5 +37,4 @@ public class Plan {
     //计划状态
     private Integer plan_status;
 
-
 }

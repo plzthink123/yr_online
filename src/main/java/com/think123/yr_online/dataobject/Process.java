@@ -55,7 +55,7 @@ public class Process {
     private String check_date;
 
     private String check_person;
-//            00 未投坯
+    //            00 未投坯
 //            05 已投坯
 //            10 已前处理
 //            15 已染色

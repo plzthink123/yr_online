@@ -19,11 +19,11 @@ public class CustomerControllerTest {
 
     @Test
     public void customerExecQuery() {
-        CustomerDto customerDto=new CustomerDto();
+        CustomerDto customerDto = new CustomerDto();
         Map<String, Object> customerPage = customerService.getCustomerPage(customerDto);
         for (Map.Entry<String, Object> entry : customerPage.entrySet()) {
-                     System.out.println("key= " + entry.getKey() + " and value= "
-                                         + entry.getValue());
-                    }
+            System.out.println("key= " + entry.getKey() + " and value= "
+                    + entry.getValue());
+        }
     }
 }

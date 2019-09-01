@@ -20,9 +20,10 @@ public interface RoleService {
     void deleteRole(Integer[] ids);
 
     List<Module> findAllModule();
+
     List<Module> findOneRoleModule(Integer ro_id);
 
-    void addModule(Integer[] movekeys,Integer ro_id);
+    void addModule(Integer[] movekeys, Integer ro_id);
 
-    void deleteRole(Integer[] movekeys,Integer ro_id);
+    void deleteRole(Integer[] movekeys, Integer ro_id);
 }

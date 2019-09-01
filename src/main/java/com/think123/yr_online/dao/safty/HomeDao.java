@@ -7,11 +7,11 @@ import java.util.List;
 
 @Mapper
 public interface HomeDao {
-	
-	public List<Module> findAllModules();
-	
-	public List<Module> findModulesByCurrUserId(String userId);
 
-	public List<Module> findMobileModulesByCurrUserId(String userId);
+    public List<Module> findAllModules();
+
+    public List<Module> findModulesByCurrUserId(String userId);
+
+    public List<Module> findMobileModulesByCurrUserId(String userId);
 
 }

@@ -29,5 +29,5 @@ public class User {
     //@TableField("u_status")
     private String u_status;
 
-    private Set<Role> roles=new HashSet<>();
+    private Set<Role> roles = new HashSet<>();
 }

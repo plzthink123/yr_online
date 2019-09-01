@@ -16,5 +16,4 @@ public class Color {
 
     private String co_status;
 
-
 }

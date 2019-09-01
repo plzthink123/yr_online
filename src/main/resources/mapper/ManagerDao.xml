@@ -1,186 +1,186 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.think123.yr_online.dao.plan.ManagerDao">
-	<resultMap id="plan_customer" type="com.think123.yr_online.dto.PlanDto">
-		<id column="plan_id" property="plan_id"/>
-		<result column="standard_id" property="standard_id"/>
-		<result column="cus_id" property="cus_id"/>
-		<result column="co_id" property="co_id"/>
-		<result column="plan_xh" property="plan_xh"/>
-		<result column="plan_month" property="plan_month"/>
-		<result column="plan_num" property="plan_num"/>
-		<result column="plan_type" property="plan_type"/>
-		<result column="plan_date" property="plan_date"/>
-		<result column="plan_person" property="plan_person"/>
-		<result column="plan_status" property="plan_status"/>
-	</resultMap>
-	<select id="findPlanList"
-			resultType="com.think123.yr_online.dataobject.Plan">
+    <resultMap id="plan_customer" type="com.think123.yr_online.dto.PlanDto">
+        <id column="plan_id" property="plan_id"/>
+        <result column="standard_id" property="standard_id"/>
+        <result column="cus_id" property="cus_id"/>
+        <result column="co_id" property="co_id"/>
+        <result column="plan_xh" property="plan_xh"/>
+        <result column="plan_month" property="plan_month"/>
+        <result column="plan_num" property="plan_num"/>
+        <result column="plan_type" property="plan_type"/>
+        <result column="plan_date" property="plan_date"/>
+        <result column="plan_person" property="plan_person"/>
+        <result column="plan_status" property="plan_status"/>
+    </resultMap>
+    <select id="findPlanList"
+            resultType="com.think123.yr_online.dataobject.Plan">
 
-		select
-		 plan_id,
-		 standard_id,
-		 cus_id,
-   		 co_id,
-	     plan_xh,
-         plan_month,
-		 plan_num,
-		 plan_type,
-		 plan_date,
-		 plan_person,
-		 plan_status
+        select
+        plan_id,
+        standard_id,
+        cus_id,
+        co_id,
+        plan_xh,
+        plan_month,
+        plan_num,
+        plan_type,
+        plan_date,
+        plan_person,
+        plan_status
 
-		from
-		bus_plan
+        from
+        bus_plan
 
-		<where>
+        <where>
 
-			<if test="plan_id != null ">
-				plan_id like concat('%',#{plan_id},'%')
-			</if>
+            <if test="plan_id != null ">
+                plan_id like concat('%',#{plan_id},'%')
+            </if>
 
-			<if test="cus_id != null ">
-				and cus_id like concat('%',#{cus_id},'%')
-			</if>
+            <if test="cus_id != null ">
+                and cus_id like concat('%',#{cus_id},'%')
+            </if>
 
-			<if test="plan_status == '0' ">
-				and plan_status = '0'
-			</if>
-			<if test="plan_status == '1' ">
-				and plan_status = '1'
-			</if>
-
-
-		</where>
-
-	</select>
-	<select id="findPlan_CustomerList"
-			resultType="com.think123.yr_online.dto.PlanDto">
-
-		select
-		p.plan_id,
-		s.standard_id,
-		s.standard_name,
-		c.cus_id,
-		c.cus_name,
-		co.co_id,
-		co.co_name,
-		p.plan_xh,
-		p.plan_month,
-		p.plan_num,
-		p.plan_type,
-		p.plan_date,
-		p.plan_person,
-		p.plan_status
-
-		from
-		bus_plan p
-		inner join info_customer  c on 	p.cus_id= c.cus_id
-		inner join info_standard s on p.standard_id=s.standard_id
-		inner join info_color co on p.co_id=co.co_id
-
-		<where>
-		    p.plan_id is not null
-
-			<if test="plan_id != null ">
-				p.plan_id like concat('%',#{plan_id},'%')
-			</if>
-
-			<if test="cus_id != null ">
-				and c.cus_id like concat('%',#{cus_id},'%')
-			</if>
-
-			<if test="plan_status == '0' ">
-				and p.plan_status = '0'
-			</if>
-			<if test="plan_status == '1' ">
-				and p.plan_status = '1'
-			</if>
+            <if test="plan_status == '0' ">
+                and plan_status = '0'
+            </if>
+            <if test="plan_status == '1' ">
+                and plan_status = '1'
+            </if>
 
 
-		</where>
+        </where>
 
-	</select>
-	<delete id="deleteManager">
-		delete from bus_plan
-		<where>
-			<foreach item="item"  collection="array" open=""
-					 separator="or" close="">
-				plan_id = #{item}
-			</foreach>
-		</where>
-	</delete>
+    </select>
+    <select id="findPlan_CustomerList"
+            resultType="com.think123.yr_online.dto.PlanDto">
 
-	<update id="deleteManagerNotReal">
+        select
+        p.plan_id,
+        s.standard_id,
+        s.standard_name,
+        c.cus_id,
+        c.cus_name,
+        co.co_id,
+        co.co_name,
+        p.plan_xh,
+        p.plan_month,
+        p.plan_num,
+        p.plan_type,
+        p.plan_date,
+        p.plan_person,
+        p.plan_status
 
-	</update>
+        from
+        bus_plan p
+        inner join info_customer c on p.cus_id= c.cus_id
+        inner join info_standard s on p.standard_id=s.standard_id
+        inner join info_color co on p.co_id=co.co_id
 
-	<insert id="addPlan">
-		insert into bus_plan
-			(
-			plan_id,
-			standard_id,
-			cus_id,
-			co_id,
-			plan_xh,
-			plan_month,
-			plan_num,
-			plan_type,
-			plan_date,
-			plan_person,
-			plan_status)
-	  	values
-	  	(
-	  	#{plan_id},
-	  	#{standard_id},
-			#{cus_id},
-			#{co_id},
-			#{plan_xh},
-			#{plan_month},
-			#{plan_num},
-			#{plan_type},
-			#{plan_date},
-			#{plan_person},
-			#{plan_status})
+        <where>
+            p.plan_id is not null
 
-	</insert>
-	<update id="modifyPlan" >
-		update bus_plan set standard_id=#{standard_id},
-			cus_id=#{cus_id},
-			co_id=#{co_id},
-			plan_xh=#{plan_xh},
-			plan_month=#{plan_month},
-			plan_num=#{plan_num},
-			plan_type=#{plan_type},
-			plan_date=#{plan_date},
-			plan_person=#{plan_person},
-			plan_status=#{plan_status}
+            <if test="plan_id != null ">
+                p.plan_id like concat('%',#{plan_id},'%')
+            </if>
 
-			where plan_id=#{plan_id}
+            <if test="cus_id != null ">
+                and c.cus_id like concat('%',#{cus_id},'%')
+            </if>
 
-	</update>
-	<update id="cancelPlan">
-		update bus_plan set standard_id=#{standard_id},
-			cus_id=#{cus_id},
-			co_id=#{co_id},
-			plan_xh=#{plan_xh},
-			plan_month=#{plan_month},
-			plan_num=#{plan_num},
-			plan_type=#{plan_type},
-			plan_date=#{plan_date},
-			plan_person=#{plan_person},
-			plan_status=#{plan_status}
+            <if test="plan_status == '0' ">
+                and p.plan_status = '0'
+            </if>
+            <if test="plan_status == '1' ">
+                and p.plan_status = '1'
+            </if>
 
-			where plan_id=#{plan_id}
-			and
-			plan_id not in
-			(select
-			plan_id
-			from bus_process)
 
-	</update>
-  
+        </where>
+
+    </select>
+    <delete id="deleteManager">
+        delete from bus_plan
+        <where>
+            <foreach item="item" collection="array" open=""
+                     separator="or" close="">
+                plan_id = #{item}
+            </foreach>
+        </where>
+    </delete>
+
+    <update id="deleteManagerNotReal">
+
+    </update>
+
+    <insert id="addPlan">
+        insert into bus_plan
+        (
+        plan_id,
+        standard_id,
+        cus_id,
+        co_id,
+        plan_xh,
+        plan_month,
+        plan_num,
+        plan_type,
+        plan_date,
+        plan_person,
+        plan_status)
+        values
+        (
+        #{plan_id},
+        #{standard_id},
+        #{cus_id},
+        #{co_id},
+        #{plan_xh},
+        #{plan_month},
+        #{plan_num},
+        #{plan_type},
+        #{plan_date},
+        #{plan_person},
+        #{plan_status})
+
+    </insert>
+    <update id="modifyPlan">
+        update bus_plan set standard_id=#{standard_id},
+        cus_id=#{cus_id},
+        co_id=#{co_id},
+        plan_xh=#{plan_xh},
+        plan_month=#{plan_month},
+        plan_num=#{plan_num},
+        plan_type=#{plan_type},
+        plan_date=#{plan_date},
+        plan_person=#{plan_person},
+        plan_status=#{plan_status}
+
+        where plan_id=#{plan_id}
+
+    </update>
+    <update id="cancelPlan">
+        update bus_plan set standard_id=#{standard_id},
+        cus_id=#{cus_id},
+        co_id=#{co_id},
+        plan_xh=#{plan_xh},
+        plan_month=#{plan_month},
+        plan_num=#{plan_num},
+        plan_type=#{plan_type},
+        plan_date=#{plan_date},
+        plan_person=#{plan_person},
+        plan_status=#{plan_status}
+
+        where plan_id=#{plan_id}
+        and
+        plan_id not in
+        (select
+        plan_id
+        from bus_process)
+
+    </update>
+
 </mapper>

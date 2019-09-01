@@ -5,6 +5,6 @@ import java.util.List;
 @FunctionalInterface
 public interface QueryAction<T> {
 
-	List<T> execute();
+    List<T> execute();
 
 }

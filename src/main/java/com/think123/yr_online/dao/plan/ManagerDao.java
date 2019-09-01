@@ -11,28 +11,27 @@ import java.util.List;
 
 //@Mapper
 public interface ManagerDao {
-	//@Select("select * from info_color")
-	List<Plan> findPlanList(PlanDto dto);
-	List<PlanDto> findPlan_CustomerList(PlanDto dto);
+    //@Select("select * from info_color")
+    List<Plan> findPlanList(PlanDto dto);
 
-	@Select("select max(plan_id) from bus_plan")
-	Integer findMaxId();
+    List<PlanDto> findPlan_CustomerList(PlanDto dto);
 
-	@Insert("insert into bus_plan values(#{co_id},#{co_name},#{co_remark},'00')")
-	void insert(ColorDto dto);
+    @Select("select max(plan_id) from bus_plan")
+    Integer findMaxId();
 
-	@Update("update bus_plan set co_name=#{co_name} , co_remark=#{co_remark} ,co_status=#{co_status} where co_id=#{co_id}")
-	void update(ColorDto dto);
+    @Insert("insert into bus_plan values(#{co_id},#{co_name},#{co_remark},'00')")
+    void insert(ColorDto dto);
 
+    @Update("update bus_plan set co_name=#{co_name} , co_remark=#{co_remark} ,co_status=#{co_status} where co_id=#{co_id}")
+    void update(ColorDto dto);
 
+    void deleteManager(Integer[] ids);
 
-	void deleteManager(Integer[] ids);
-
-	void deleteManagerNotReal(Integer[] ids);
+    void deleteManagerNotReal(Integer[] ids);
 
     void addPlan(PlanDto dto);
 
-	void modifyPlan(PlanDto dto);
+    void modifyPlan(PlanDto dto);
 
-	void cancelPlan(PlanDto dto);
+    void cancelPlan(PlanDto dto);
 }

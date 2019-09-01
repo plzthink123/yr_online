@@ -26,18 +26,21 @@ public class PretreatmentController {
     private PretreatmentService pretreatmentService;
 
     @GetMapping("/pretreatment")
-    public Map<String,Object> customerExecQuery(ProcessDto dto){
+    public Map<String, Object> customerExecQuery(ProcessDto dto) {
         //System.out.println(dto);
         return pretreatmentService.getProcessPageOnStatus5(dto);
     }
+
     @PutMapping("/pretreatment")
-    public Result customerExecUpd(@RequestBody ProcessDto dto, HttpSession session ) throws InterruptedException {
-        CurrUser currUser=(CurrUser)session.getAttribute("CurrUser");
-        dto.setPretreat_person( currUser.getUserName());
+    public Result customerExecUpd(@RequestBody ProcessDto dto, HttpSession session) throws InterruptedException {
+        CurrUser currUser = (CurrUser) session.getAttribute("CurrUser");
+        dto.setPretreat_person(currUser.getUserName());
         dto.setPretreat_num(dto.getProcess_groupnum());
-        Date dt=new Date();
-        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
+        Date dt = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String format = simpleDateFormat.format(dt);
+        //设置pretreat_num
+        dto.setPretreat_num(dto.getGroup_num());
         dto.setPretreat_date(format);
         pretreatmentService.modifyProcess(dto);
         return Result.successResult("!success！");

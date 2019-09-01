@@ -15,7 +15,7 @@ import java.util.Date;
  */
 @Data
 @ToString
-public class PlanDto  extends PageParam{
+public class PlanDto extends PageParam {
     //计划单id
     private Integer plan_id;
     //标准id
@@ -28,7 +28,7 @@ public class PlanDto  extends PageParam{
     private Integer plan_xh;
     //计划月份
     @JsonFormat(pattern = "yyyy-MM")
-    @DateTimeFormat(pattern="yyyy-MM")
+    @DateTimeFormat(pattern = "yyyy-MM")
     private String plan_month;
     //计划产量
     private BigDecimal plan_num;
@@ -36,7 +36,7 @@ public class PlanDto  extends PageParam{
     private Integer plan_type;
     //计划下达日期
     @JsonFormat(pattern = "yyyy-MM-dd")
-    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date plan_date;
     //计划登记人
     private String plan_person;

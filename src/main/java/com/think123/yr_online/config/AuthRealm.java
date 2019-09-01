@@ -27,6 +27,7 @@ public class AuthRealm extends AuthorizingRealm {
 
     /**
      * 认证授权
+     *
      * @param principalCollection
      * @return
      */
@@ -62,6 +63,7 @@ public class AuthRealm extends AuthorizingRealm {
 
     /**
      * 认证登陆
+     *
      * @param authenticationToken
      * @return
      * @throws AuthenticationException
@@ -82,7 +84,7 @@ public class AuthRealm extends AuthorizingRealm {
                 /*
                 	创建当前用户
                 */
-        CurrUser currUser = new CurrUser(user.getU_id(),user.getU_name());
+        CurrUser currUser = new CurrUser(user.getU_id(), user.getU_name());
 
 
                 /*

@@ -23,53 +23,55 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/user")
-    public Map<String,Object> userExecQuery(UserDto dto){
-
+    public Map<String, Object> userExecQuery(UserDto dto) {
 
         return userService.getUserPage(dto);
 
     }
 
     @PostMapping("/user")
-    public Result userExecAdd(@RequestBody UserDto dto ) throws InterruptedException {
+    public Result userExecAdd(@RequestBody UserDto dto) throws InterruptedException {
         Thread.sleep(2000);
         userService.addUser(dto);
         return Result.successResult("新增User信息成功！");
     }
 
     @PutMapping("/user")
-    public Result userExecUpd(@RequestBody UserDto dto ) throws InterruptedException {
-        log.info("dto: {}",dto);
+    public Result userExecUpd(@RequestBody UserDto dto) throws InterruptedException {
+        log.info("dto: {}", dto);
         userService.modifyUser(dto);
         return Result.successResult("修改User信息成功！");
     }
 
     @DeleteMapping("/user")
-    public Result userExecDel(@RequestBody String[] ids ) throws InterruptedException {
+    public Result userExecDel(@RequestBody String[] ids) throws InterruptedException {
 
         userService.deleteUser(ids);
         return Result.successResult("删除User信息成功！");
     }
+
     @GetMapping("/allRole")
-    public Result allRole()throws  InterruptedException{
+    public Result allRole() throws InterruptedException {
         List<Role> allRole = userService.getAllRole();
 
-        return  Result.successResult("success",allRole);
+        return Result.successResult("success", allRole);
     }
 
     @GetMapping("/{u_id}")
-    public Result getOneUserRole(@PathVariable("u_id")String u_id){
+    public Result getOneUserRole(@PathVariable("u_id") String u_id) {
         List<Role> oneUserRole = userService.getOneUserRole(u_id);
-        return Result.successResult("success",oneUserRole);
+        return Result.successResult("success", oneUserRole);
     }
+
     @PutMapping("/addRole/{movekeys}")
-    public Result addRole(@PathVariable("movekeys")Integer[] movekeys,@RequestBody UserDto userDto){
-        userService.addRole(movekeys,userDto.getU_id());
-       return  Result.successResult("success");
+    public Result addRole(@PathVariable("movekeys") Integer[] movekeys, @RequestBody UserDto userDto) {
+        userService.addRole(movekeys, userDto.getU_id());
+        return Result.successResult("success");
     }
+
     @PutMapping("/deleteRole/{movekeys}")
-    public Result deleteRole(@PathVariable("movekeys")Integer[] movekeys,@RequestBody UserDto userDto){
-        userService.deleteRole(movekeys,userDto.getU_id());
+    public Result deleteRole(@PathVariable("movekeys") Integer[] movekeys, @RequestBody UserDto userDto) {
+        userService.deleteRole(movekeys, userDto.getU_id());
         return Result.successResult("success");
     }
 }

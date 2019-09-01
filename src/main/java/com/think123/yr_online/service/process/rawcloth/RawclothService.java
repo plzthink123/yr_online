@@ -12,7 +12,6 @@ import java.util.Map;
  */
 public interface RawclothService {
 
-
     Map<String, Object> getProcessPage(ProcessDto dto);
 
     List<ProcessDto> getPlanPage(Integer plan_id);

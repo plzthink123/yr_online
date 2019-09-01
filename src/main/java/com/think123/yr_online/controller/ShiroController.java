@@ -12,14 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class ShiroController {
 
     @RequestMapping("/loginTo")
-    public Result loginTo(){
+    public Result loginTo() {
         return Result.successResult("请登录!");
     }
 
     @RequestMapping("/unauthorized")
-    public Result unauthorized(){
+    public Result unauthorized() {
         return Result.successResult("没有权限");
     }
-
 
 }

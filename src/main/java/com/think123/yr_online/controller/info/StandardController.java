@@ -21,37 +21,35 @@ public class StandardController {
     private StandardService standardService;
 
     @GetMapping("/standard")
-    public Map<String,Object> standardExecQuery(StandardDto dto){
-
+    public Map<String, Object> standardExecQuery(StandardDto dto) {
 
         return standardService.getStandardPage(dto);
 
     }
+
     @GetMapping("/standard/all")
-    public Result standardExecQueryAll( ){
+    public Result standardExecQueryAll() {
 
-
-        return Result.successResult("success",standardService.getStandardAll());
+        return Result.successResult("success", standardService.getStandardAll());
 
     }
 
-
     @PostMapping("/standard")
-    public Result standardExecAdd(@RequestBody StandardDto dto ) throws InterruptedException {
+    public Result standardExecAdd(@RequestBody StandardDto dto) throws InterruptedException {
         Thread.sleep(2000);
         standardService.addStandard(dto);
         return Result.successResult("新增标准信息成功！");
     }
 
     @PutMapping("/standard")
-    public Result standardExecUpd(@RequestBody StandardDto dto ) throws InterruptedException {
-        log.info("dto: {}" ,dto);
+    public Result standardExecUpd(@RequestBody StandardDto dto) throws InterruptedException {
+        log.info("dto: {}", dto);
         standardService.modifyStandard(dto);
         return Result.successResult("修改标准信息成功！");
     }
 
     @DeleteMapping("/standard")
-    public Result standardExecDel(@RequestBody Integer[] ids ) throws InterruptedException {
+    public Result standardExecDel(@RequestBody Integer[] ids) throws InterruptedException {
 
         standardService.deleteStandard(ids);
         return Result.successResult("删除标准信息成功！");

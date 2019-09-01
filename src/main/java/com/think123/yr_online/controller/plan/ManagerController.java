@@ -24,7 +24,7 @@ public class ManagerController {
     private ManagerService managerService;
 
     @GetMapping("/manager")
-    public Map<String,Object> customerExecQuery(PlanDto dto){
+    public Map<String, Object> customerExecQuery(PlanDto dto) {
         //System.out.println(dto);
         return managerService.getPlanPage(dto);
     }
@@ -32,10 +32,10 @@ public class ManagerController {
     @PostMapping("/manager")
     public Result customerExecAdd(@RequestBody PlanDto dto, HttpSession session) throws InterruptedException {
         Thread.sleep(1000);
-        CurrUser currUser=(CurrUser)session.getAttribute("CurrUser");
-        dto.setPlan_person( currUser.getUserName());
+        CurrUser currUser = (CurrUser) session.getAttribute("CurrUser");
+        dto.setPlan_person(currUser.getUserName());
         dto.setPlan_status(0);
-        Date dt=new Date();
+        Date dt = new Date();
         //SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
         //simpleDateFormat.format(dt);
         dto.setPlan_date(dt);
@@ -45,27 +45,28 @@ public class ManagerController {
     }
 
     @PutMapping("/manager")
-    public Result customerExecUpd(@RequestBody PlanDto dto ) throws InterruptedException {
-        log.info("dto: {}",dto);
+    public Result customerExecUpd(@RequestBody PlanDto dto) throws InterruptedException {
+        log.info("dto: {}", dto);
         managerService.modifyPlan(dto);
         return Result.successResult("修改plan信息成功！");
     }
+
     @PutMapping("/manager/cancel")
-    public Result cancelUpd(@RequestBody PlanDto dto ) throws InterruptedException {
-        log.info("dto: {}",dto);
+    public Result cancelUpd(@RequestBody PlanDto dto) throws InterruptedException {
+        log.info("dto: {}", dto);
         managerService.cancelPlan(dto);
         return Result.successResult("修改plan信息成功！");
     }
 
-
     @DeleteMapping("/manager")
-    public Result managerExecDel(@RequestBody Integer[] ids ) throws InterruptedException {
+    public Result managerExecDel(@RequestBody Integer[] ids) throws InterruptedException {
 
         managerService.deleteManager(ids);
         return Result.successResult("删除计划信息成功！");
     }
+
     @DeleteMapping("/manager/notReal")
-    public Result managerExecDelNotReal(@RequestBody Integer[] ids ) throws InterruptedException {
+    public Result managerExecDelNotReal(@RequestBody Integer[] ids) throws InterruptedException {
 
         managerService.deleteManagerNotReal(ids);
         return Result.successResult("删除计划信息成功！");

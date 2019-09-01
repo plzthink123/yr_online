@@ -10,37 +10,35 @@ import java.io.Serializable;
 
 /**
  * 封装当前登录用户
- * @author Administrator
  *
+ * @author Administrator
  */
 @Data
 @ToString
 @Slf4j
 public class CurrUser implements HttpSessionBindingListener, Serializable {
 
-	/*private static final long serialVersionUID = -4966214203200407139L;
-	private static List<CurrUser> currUserList=new ArrayList<>();
+    /*private static final long serialVersionUID = -4966214203200407139L;
+    private static List<CurrUser> currUserList=new ArrayList<>();
 
-	private static List<String> currUser_ids=new ArrayList<>();
+    private static List<String> currUser_ids=new ArrayList<>();
 */
-	private String userId;
-	private String userName;
+    private String userId;
+    private String userName;
 
-	//private String sessionid;
+    //private String sessionid;
 
-	//private HttpSession session;
+    //private HttpSession session;
 
-	
-	public CurrUser(String userId, String userName) {
-		super();
-		this.userId = userId;
-		this.userName = userName;
-	}
+    public CurrUser(String userId, String userName) {
+        super();
+        this.userId = userId;
+        this.userName = userName;
+    }
 
-
-	@Override
-	public void valueBound(HttpSessionBindingEvent event) {
-		log.info("=========================Session生成=========================");
+    @Override
+    public void valueBound(HttpSessionBindingEvent event) {
+        log.info("=========================Session生成=========================");
 	/*	session=event.getSession();
 		//System.out.println(session.getId());
 		sessionid=event.getSession().getId();
@@ -58,13 +56,13 @@ public class CurrUser implements HttpSessionBindingListener, Serializable {
 			}
 		}*/
 
-	}
+    }
 
-	@Override
-	public void valueUnbound(HttpSessionBindingEvent event) {
-		log.info("=========================Session销销毁=========================");
+    @Override
+    public void valueUnbound(HttpSessionBindingEvent event) {
+        log.info("=========================Session销销毁=========================");
 
-		//currUserList.remove(this);
+        //currUserList.remove(this);
 
-	}
+    }
 }
